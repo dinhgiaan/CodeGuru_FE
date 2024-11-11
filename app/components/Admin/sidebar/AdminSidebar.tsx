@@ -18,7 +18,7 @@ import {
   QuizIcon,
   WysiwygIcon,
   ManageHistoryIcon,
-  SettingsIcon,
+  PortraitIcon,
   ExitToAppIcon,
 } from "./Icon";
 import avatarDefault from "../../../../public/assets/avatar.png";
@@ -310,9 +310,9 @@ const Sidebar = () => {
               {!isCollapsed && "LỰA CHỌN KHÁC"}
             </Typography>
             <Item
-              title="Cài đặt"
-              to="/admin/settings"
-              icon={<SettingsIcon />}
+              title="Quay về hồ sơ"
+              to="/profile"
+              icon={<PortraitIcon />}
               selected={selected}
               setSelected={setSelected}
               className={`${course.font}`}

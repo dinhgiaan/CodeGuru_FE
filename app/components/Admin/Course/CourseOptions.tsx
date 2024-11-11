@@ -17,7 +17,7 @@ const CourseOptions: FC<Props> = ({ active, setActive }) => {
   return (
     <div>
       {options.map((option: any, index: number) => (
-        <div key={index} className="w-full flex py-5">
+        <div key={index} className="w-full flex py-5 px-16">
           <div
             className={`w-[35px] h-[35px] rounded-full flex items-center justify-center ${active + 1 > index ? "bg-blue-500" : "bg-[#565854]"
               } relative`}

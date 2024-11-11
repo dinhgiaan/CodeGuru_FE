@@ -22,7 +22,7 @@ const AllCourses = (props: Props) => {
         { field: "purchased", headerName: "Số học viên", flex: 0.5 },
         { field: "created_at", headerName: "Ngày tạo", flex: 0.5 },
         {
-            field: " ",
+            field: "edit",
             headerName: "Sửa",
             flex: 0.2,
             renderCell: (params: any) => {
@@ -36,7 +36,7 @@ const AllCourses = (props: Props) => {
             },
         },
         {
-            field: " ",
+            field: "delete",
             headerName: "Xóa",
             flex: 0.2,
             renderCell: (params: any) => {
@@ -84,7 +84,7 @@ const AllCourses = (props: Props) => {
                     : (
                         <Box m="20px"
                             sx={{
-                                width: "80%", maxWidth: "1200px", padding: "20px", borderRadius: 0.2, bgcolor: '#3a90a1',
+                                width: "100%", maxWidth: "1200px", padding: "20px", borderRadius: 0.2, bgcolor: '#3a90a1',
                             }
                             }>
                             <Box
