@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="container mx-auto flex flex-col items-center">
                 <div className="flex space-x-4 mb-4">
                     <Link href="/course" className="hover:text-yellow-400">Khóa học</Link>
-                    <Link href="/about-us" className="hover:text-gray-400">Về chúng tôi</Link>
+                    <Link href="/about" className="hover:text-gray-400">Về chúng tôi</Link>
                     <Link href="/privacy" className="hover:text-gray-400">Chính sách</Link>
                     <Link href="/faq" className="hover:text-gray-400">FAQ</Link>
                 </div>

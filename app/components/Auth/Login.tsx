@@ -31,7 +31,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
     });
 
     // add event press key enter
-    const handlePressKey = (event) => {
+    const handlePressKey = (event: any) => {
         if (event.key === "Enter") {
             formik.handleSubmit(event);
         }

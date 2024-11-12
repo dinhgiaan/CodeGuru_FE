@@ -23,6 +23,7 @@ input::-webkit-inner-spin-button {
 }
 
 input {
+
   width: 100%;
   /* Chiều rộng đầy đủ */
   padding: 10px;
@@ -37,7 +38,7 @@ input {
 
 body {
   color: rgb(var(--foreground-rgb));
-  overflow: hidden;
+  overflow:auto;
 }
 
 .hero_animation {
@@ -106,7 +107,7 @@ body {
 
 /* scroll */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {

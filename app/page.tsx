@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 import Heading from './utils/Heading';
 import Header from "./components/Header";
 import Hero from './components/Route/Hero'
+import Courses from "./components/Route/Courses"
 import Footer from './components/Footer';
 
 interface Props {
@@ -15,7 +16,7 @@ const Page: FC<Props> = (props) => {
      const [route, setRoute] = useState("Login");
      return (
           <>
-               <div className='overflow-auto'>
+               <div>
                     <Heading
                          title='CodeGuru'
                          description='CodeGuru là trang web cung cấp các khóa học đa dạng'
@@ -29,7 +30,9 @@ const Page: FC<Props> = (props) => {
                          route={route}
                     />
                     <Hero />
-                    <Footer />
+                    <Courses/>
+                  
+                    
                </div>
           </>
      )
