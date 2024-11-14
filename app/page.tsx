@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Hero from './components/Route/Hero'
 import Courses from "./components/Route/Courses"
 import Footer from './components/Footer';
+import { Reviews } from '@mui/icons-material';
 
 interface Props {
      className: string,
@@ -31,8 +32,7 @@ const Page: FC<Props> = (props) => {
                     />
                     <Hero />
                     <Courses/>
-                  
-                    
+                    <Reviews/>  
                </div>
           </>
      )
