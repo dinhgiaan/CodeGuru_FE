@@ -27,7 +27,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
   const [updateUserRole, { error: updateError, isSuccess }] = useUpdateUserRoleMutation();
-  const { isLoading, data, error } = useGetAllUsersQuery({});
+  const { isLoading, data, refetch } = useGetAllUsersQuery({}, { refetchOnMountOrArgChange: true });
   const [deleteUser, { isSuccess: deleteSuccess, error: deleteError }] = useDeleteUserMutation({});
 
 
@@ -40,10 +40,12 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
     }
 
     if (isSuccess) {
+      refetch();
       toast.success("Cập nhật vai trò người dùng thành công!");
       setActive(false);
     }
     if (deleteSuccess) {
+      refetch();
       toast.success("Xóa người dùng thành công!");
       setOpen(false);
     }

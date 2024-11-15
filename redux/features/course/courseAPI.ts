@@ -19,15 +19,15 @@ export const courseAPI = apiSlice.injectEndpoints({
             }),
         }),
         getUsersAllCourses: builder.query({
-            query:()=>({
-                url:'get-courses',
-                method:'GET',
+            query: () => ({
+                url: 'get-courses',
+                method: 'GET',
                 credentials: 'include' as const,
             }),
         }),
         getCoursesDetails: builder.query({
             query: (id) => ({
-                url: `get-courses/${id}`,
+                url: `get-course/${id}`,
                 method: "GET",
                 credentials: 'include' as const,
             }),

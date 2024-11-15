@@ -32,9 +32,8 @@ const CourseContentList: FC<Props> = (props) => {
   };
   return (
     <div
-      className={`mt-[15px] w-full ${
-        !props.isDemo && "ml-[-30px] sticky top-24 left-0 z-30"
-      }`}
+      className={`mt-[15px] w-full ${!props.isDemo && "ml-[-30px] sticky top-24 left-0 z-30"
+        }`}
     >
       {videoSections.map((section: string, sectionIndex: number) => {
         const isSectionVisible = visibleSections.has(section);
@@ -77,11 +76,11 @@ const CourseContentList: FC<Props> = (props) => {
               </div>
             </div>
             <h5 className="text-black dark:text-white">
-              {sectionVideoCount} Lessons .{" "}
+              {sectionVideoCount} bài giảng .{" "}
               {sectionVideoLength < 60
                 ? sectionVideoLength
                 : sectionContentHours.toFixed(2)}{" "}
-              {sectionVideoLength > 60 ? "hours" : "minutes"}
+              {sectionVideoLength > 60 ? "giờ" : "phút"}
             </h5>
             <br />
             {isSectionVisible && (
@@ -91,9 +90,8 @@ const CourseContentList: FC<Props> = (props) => {
                   const contentLength: number = item.videoLength / 60;
                   return (
                     <div
-                      className={`w-full ${
-                        videoIndex === props.activeVideo ? "bg-slate-800" : ""
-                      } cursor-pointer transition-all p-2`}
+                      className={`w-full ${videoIndex === props.activeVideo ? "bg-slate-800" : ""
+                        } cursor-pointer transition-all p-2`}
                       key={item._id}
                       onClick={() =>
                         props.isDemo ? null : props?.setActiveVideo(videoIndex)
@@ -113,7 +111,7 @@ const CourseContentList: FC<Props> = (props) => {
                         {item.videoLength > 60
                           ? contentLength.toFixed(2)
                           : item.videoLength}{" "}
-                        {item.videoLength > 60 ? "hours" : "minutes"}
+                        {item.videoLength > 60 ? "giờ" : "phút"}
                       </h5>
                     </div>
                   );

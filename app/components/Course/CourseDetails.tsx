@@ -36,11 +36,11 @@ const CourseDetails = ({ data }: Props) => {
               <div className="flex items-center">
                 <Rating rating={data.ratings} />
                 <h5 className="text-black dark:text-white">
-                  {data.reviews?.length} Reviews
+                  {data.reviews?.length} Đánh giá
                 </h5>
               </div>
               <h5 className="text-black dark:text-white">
-                {data.purchased} Students
+                {data.purchased} Học viên
               </h5>
             </div>
             <br />

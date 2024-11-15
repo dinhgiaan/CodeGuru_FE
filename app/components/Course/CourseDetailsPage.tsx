@@ -26,7 +26,7 @@ const CourseDetailsPage = ({ id }: Props) => {
             title={
               data?.course?.name
                 ? `${data.course.name} - Code Guru`
-                : "Loading..."
+                : "Đang tải..."
             }
             description="Code Guru là một chương trình được phát triển theo hướng cộng đồng, được thực hiện bởi Đinh Gia Ân và các lập trình viên khác nhằm giúp đỡ người dùng trong quá trình học tập"
             keywords={data?.course?.tags ?? []}
