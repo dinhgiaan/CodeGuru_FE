@@ -165,7 +165,7 @@ const CourseDetails = ({ data }: Props) => {
               <CoursePlayer videoUrl={data?.demoUrl} title={data?.title} />
               <div className="flex items-center">
                 <h1 className="pt-5 text-[25px] text-black dark:text-white">
-                  {data.price === 0 ? "Free" : data.price + "Vnd"}
+                  {data.price === 0 ? "miễn phí" : data.price + " VNĐ"}
                 </h1>
                 <h5 className="pl-3 text-[20px] mt-2 line-through opacity-80 text-black dark:text-white">
                   {data.estimatedPrice}Vnd
@@ -188,23 +188,20 @@ const CourseDetails = ({ data }: Props) => {
                     className={`${style.button} w-[180px] my-3 font-Poppins cursor-pointer bg-[#DC143C]`}
                     onClick={handleOrder}
                   >
-                    Mua ngay {data.price}Vnd
+                    Mua ngay {data.price} VNĐ
                   </div>
                 )}
               </div>
               <br />
               <p className="pb-1 text-black dark:text-white">
                 {" "}
-                * Bao gồm source code
+                * Bao gồm Source Code
               </p>
               <p className="pb-1 text-black dark:text-white">
                 * Không giới hạn thời gian
               </p>
               <p className="pb-1 text-black dark:text-white">
                 * Thêm các công cụ trợ giúp việc học
-              </p>
-              <p className="pb-3 800px:pb-1 text-black dark:text-white">
-                * Chứng chỉ tốt nghiệp
               </p>
             </div>
           </div>
