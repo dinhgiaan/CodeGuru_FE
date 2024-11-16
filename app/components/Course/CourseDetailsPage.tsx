@@ -1,10 +1,12 @@
 import { useGetCoursesDetailsQuery } from "@/redux/features/course/courseAPI";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import Heading from "@/app/utils/Heading";
 import Header from "../Header";
 import CourseDetails from "./CourseDetails";
 import Footer from "../Footer";
+import { useCreatePaymentIntentMutation, useGetStripePublishableKeyQuery } from "@/redux/features/order/orderAPI";
+import { loadStripe } from "@stripe/stripe-js";
 
 type Props = {
   id: string;
@@ -15,6 +17,28 @@ const CourseDetailsPage = ({ id }: Props) => {
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetCoursesDetailsQuery(id);
+  const { data: config } = useGetStripePublishableKeyQuery({});
+  const [createPaymentIntent, { data: paymentIntentData }] = useCreatePaymentIntentMutation();
+  const [stripePromise, setStripePromise] = useState<any>(null);
+  const [clientSecret, setClientSecret] = useState('');
+
+  useEffect(() => {
+    if (config) {
+      const publishablekey = config?.publishablekey;
+      setStripePromise(loadStripe(publishablekey));
+    }
+    if (data) {
+      // Đảm bảo số tiền là số nguyên và lớn hơn 12,000 VND
+      const amount = Math.max(Math.round(data.course.price), 12000);
+      createPaymentIntent(amount);
+    }
+  }, [config, data]);
+
+  useEffect(() => {
+    if (paymentIntentData) {
+      setClientSecret(paymentIntentData?.client_secret);
+    }
+  }, [paymentIntentData]);
 
   return (
     <>
@@ -25,10 +49,10 @@ const CourseDetailsPage = ({ id }: Props) => {
           <Heading
             title={
               data?.course?.name
-                ? `${data.course.name} - Code Guru`
+                ? `${data.course.name} - CodeGuru`
                 : "Đang tải..."
             }
-            description="Code Guru là một chương trình được phát triển theo hướng cộng đồng, được thực hiện bởi Đinh Gia Ân và các lập trình viên khác nhằm giúp đỡ người dùng trong quá trình học tập"
+            description="CodeGuru là trang web cung cấp các khóa học đa dạng"
             keywords={data?.course?.tags ?? []}
           />
           <Header
@@ -38,8 +62,7 @@ const CourseDetailsPage = ({ id }: Props) => {
             setOpen={setOpen}
             activeItem={1}
           />
-          {data && data.course && <CourseDetails data={data.course} />}
-
+          {data && data.course && <CourseDetails data={data.course} stripePromise={stripePromise} clientSecret={clientSecret} />}
           <Footer />
         </div>
       )}

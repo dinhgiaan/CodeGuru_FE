@@ -11,23 +11,21 @@ const Hero: FC<Props> = (props) => {
         <div className="w-full flex items-center">
             <div className="relative w-full h-[50vh] sm:h-[600px] lg:h-[700px] hero_animation">
                 <div className="flex flex-col-reverse lg:flex-row items-center justify-between pt-[70px] lg:pt-0 z-10 relative">
-                    {/* Bên trái: Hình ảnh */}
                     <div className="relative w-full min-h-screen lg:w-[40%] flex items-center justify-start">
-                        <div className="absolute -top-[10] right-20 w-5/6 h-3/4 rounded-full bg-[#e8f3f8] dark:bg-[#48c2ee] z-0 overflow-hidden"></div>
+                        <div className="absolute top-[90] right-20 w-5/6 h-3/4 rounded-full bg-[#e8f3f8] dark:bg-[#48c2ee] z-0 overflow-hidden"></div>
                         <Image
                             src={require("../../../public/assets/banner-img-1.png")}
                             alt=""
-                            className="object-contain w-[90%] lg:max-w-[90%] xl:max-w-[85%] h-auto z-10 left-12 relative"
+                            className="object-contain w-[80%] lg:max-w-[80%] xl:max-w-[85%] h-auto z-10 left-12 relative"
                         />
                     </div>
 
-                    {/* Bên phải: Nội dung */}
                     <div className="flex flex-col items-center text-center lg:text-left lg:w-[50%] lg:pr-[40px] lg:mr-[20px] mt-[150px] lg:mt-0">
                         <h2 className="dark:text-[#f7f7f7] text-[#000000c7] text-[30px] px-3 w-full lg:text-[40px] font-[600] font-Josefin py-2 lg:leading-[60px]">
                             Cải thiện trải nghiệm học tập trực tuyến của bạn tốt hơn ngay lập tức
                         </h2>
                         <p className="dark:text-[#f7f7f7] text-[#000000ac] font-Josefin font-[600] text-[18px] lg:w-[78%] xl:w-[65%] mt-[2%]">
-                            Chúng tôi có hơn 10 khóa học trực tuyến và hơn 1000 học viên đăng ký trực tuyến. Tìm các khóa học mong muốn của bạn từ họ.
+                            Tại CodeGuru, chúng tôi cung cấp hơn 15 khóa học đa dạng và đã có hơn 1,000 học viên tham gia học tập cùng chúng tôi. Hãy khám phá khóa học lập trình mà bạn mong muốn và bắt đầu hành trình nâng cao kỹ năng của mình ngay hôm nay!
                         </p>
                         <div className="w-full h-[50px] bg-transparent relative mt-4">
                             <input

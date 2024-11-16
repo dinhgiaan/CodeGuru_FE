@@ -2,27 +2,36 @@ import { style } from "@/app/styles/style";
 import CoursePlayer from "@/app/utils/CoursePlayer";
 import Rating from "@/app/utils/Rating";
 import Link from "next/link";
-import { format } from "path";
-import React from "react";
-import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import { format } from "timeago.js";
+import React, { useState } from "react";
+import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import CourseContentList from "../Course/CourseContentList";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../Payment/CheckoutForm";
 
 type Props = {
   data: any;
+  clientSecret: string;
+  stripePromise: any;
 };
 
-const CourseDetails = ({ data }: Props) => {
+const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
+  const formatVNDPrice = (price: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(price);
+  };
   const { user } = useSelector((state: any) => state.auth);
-  const discountPercentage =
-    ((data?.estimatedPrice - data.price) / data.estimatedPrice) * 100;
+  const [open, setOpen] = useState(false);
+  const discountPercentage = ((data?.estimatedPrice - data.price) / data.estimatedPrice) * 100;
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased =
-    user && user.courses?.find((item: any) => item._id === data._id);
+  const isPurchased = user && user.courses?.find((item: any) => item._id === data._id);
   const handleOrder = (e: any) => {
-    console.log("ggg");
+    setOpen(true);
   };
   return (
     <div>
@@ -112,7 +121,7 @@ const CourseDetails = ({ data }: Props) => {
                     ? Number.isInteger(data?.ratings)
                       ? data?.ratings.toFixed(1)
                       : data?.ratings.toFixed(2)
-                    : "0.0"}{" "}
+                    : "0"}{" "}
                   Lượt đánh giá . {data?.reviews?.length ?? 0} Số lượng người đã
                   xem{" "}
                 </h5>
@@ -133,12 +142,12 @@ const CourseDetails = ({ data }: Props) => {
                       <div className="hidden lg:block pl-2">
                         <div className="flex items-center">
                           <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                            {item.user?.name || "Anonymous"}
+                            {item.user?.name || "Ẩn danh"}
                           </h5>
                           <Rating rating={item.rating} />
                         </div>
                         <p className="text-black dark:text-white">
-                          {item.comment || "No comment provided."}
+                          {item.comment || "Không có bình luận nào."}
                         </p>
                         <small className="text-[#000000d1] dark:text-[#ffffff83]">
                           {item.createdAt
@@ -150,7 +159,7 @@ const CourseDetails = ({ data }: Props) => {
 
                       <div className="pl-2 flex lg:hidden items-center">
                         <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                          {item.user?.name || "Anonymous"}
+                          {item.user?.name || "Ẩn danh"}
                         </h5>
                         <Rating rating={item.rating} />
                       </div>
@@ -165,10 +174,10 @@ const CourseDetails = ({ data }: Props) => {
               <CoursePlayer videoUrl={data?.demoUrl} title={data?.title} />
               <div className="flex items-center">
                 <h1 className="pt-5 text-[25px] text-black dark:text-white">
-                  {data.price === 0 ? "miễn phí" : data.price + " VNĐ"}
+                  {data.price === 0 ? "Miễn phí" : formatVNDPrice(data.price)}
                 </h1>
                 <h5 className="pl-3 text-[20px] mt-2 line-through opacity-80 text-black dark:text-white">
-                  {data.estimatedPrice}Vnd
+                  {data.estimatedPrice}VNĐ
                 </h5>
 
                 <h4 className="pl-5 pt-4 text-[22px] text-black dark:text-white">
@@ -185,17 +194,17 @@ const CourseDetails = ({ data }: Props) => {
                   </Link>
                 ) : (
                   <div
-                    className={`${style.button} w-[180px] my-3 font-Poppins cursor-pointer bg-[#DC143C]`}
+                    className={`${style.button} w-[25vh] my-3 font-Poppins cursor-pointer bg-[#DC143C]`}
                     onClick={handleOrder}
                   >
-                    Mua ngay {data.price} VNĐ
+                    Mua ngay {formatVNDPrice(data.price)}
                   </div>
                 )}
               </div>
               <br />
               <p className="pb-1 text-black dark:text-white">
                 {" "}
-                * Bao gồm Source Code
+                * Cung cấp đầy đủ Source Code
               </p>
               <p className="pb-1 text-black dark:text-white">
                 * Không giới hạn thời gian
@@ -207,6 +216,29 @@ const CourseDetails = ({ data }: Props) => {
           </div>
         </div>
       </div>
+      <>
+        {open && (
+          <div className="w-full h-screen bg-[#0000036] fixed top-0 left-0 z-50 flex items-center justify-center">
+            <div className="w-[470px] h-auto bg-white rounded-xl shadow-p3 flex flex-col items-center pt-6 px-4 relative">
+              <div className="mb-4 cursor-pointer">
+                <IoCloseOutline
+                  size={28}
+                  className="text-black cursor-pointer absolute top-4 right-4"
+                  onClick={() => setOpen(false)}
+                />
+              </div>
+              <div className="w-96 pb-8">
+                {stripePromise && clientSecret && (
+                  <Elements stripe={stripePromise} options={{ clientSecret, locale: 'vi' }}>
+                    <CheckoutForm setOpen={setOpen} data={data} />
+                  </Elements>
+                )}
+              </div>
+            </div>
+          </div>
+
+        )}
+      </>
     </div>
   );
 };

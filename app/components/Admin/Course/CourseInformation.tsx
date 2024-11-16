@@ -125,7 +125,7 @@ const CourseInformation: FC<Props> = ({
               onChange={(e) =>
                 setCourseInfo({ ...courseInfo, estimatedPrice: e.target.value })
               }
-              id="estimatedprice"
+              id="estimatedPrice"
               placeholder="2.499.000 VNĐ"
               className={style.input}
             />
