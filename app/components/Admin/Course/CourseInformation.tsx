@@ -1,6 +1,7 @@
 import React, { useState, FC } from "react";
 import { style } from '@/app/styles/style';
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 type Props = {
   courseInfo: any;
@@ -19,6 +20,12 @@ const CourseInformation: FC<Props> = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!courseInfo.thumbnail) {
+      toast.error("Tải lên hình ảnh để tới bước tiếp theo.");
+      return;
+    }
+
     setActive(active + 1);
   };
 
@@ -117,15 +124,15 @@ const CourseInformation: FC<Props> = ({
 
           <div className="w-[48%]">
             <label className={style.label}>
-              Giá khi bán khóa học
+              Giá gốc khóa học
             </label>
             <input
               type="number"
-              value={courseInfo.estimatedPrice}
+              value={courseInfo.suggestedPrice}
               onChange={(e) =>
-                setCourseInfo({ ...courseInfo, estimatedPrice: e.target.value })
+                setCourseInfo({ ...courseInfo, suggestedPrice: e.target.value })
               }
-              id="estimatedPrice"
+              id="suggestedPrice"
               placeholder="2.499.000 VNĐ"
               className={style.input}
             />

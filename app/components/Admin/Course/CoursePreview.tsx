@@ -19,8 +19,14 @@ const CoursePreview: FC<Props> = ({
     setActive,
     active
 }) => {
+    const formatVNDPrice = (price: number) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(price);
+    };
     const [isLoading, setIsLoading] = useState(false);
-    const discountPercent = ((courseData?.estimatedPrice - courseData?.price) / courseData?.estimatedPrice) * 100;
+    const discountPercent = ((courseData?.suggestedPrice - courseData?.price) / courseData?.suggestedPrice) * 100;
     const discountPercentPrice = discountPercent.toFixed(0);
 
     const prevButton = () => {
@@ -45,11 +51,11 @@ const CoursePreview: FC<Props> = ({
                 </div>
                 <div className='flex items-center dark:text-white text-black ml-14'>
                     <h1 className='pt-5 text-[25px]'>
-                        {courseData?.price === 0 ? "Miễn phí" : courseData?.price + " VNĐ"}
+                        {courseData?.price === 0 ? "Miễn phí" : formatVNDPrice(courseData?.price)}
                     </h1>
 
                     <h5 className='pl-3 text-[20px] mt-2 line-through opacity-80'>
-                        {courseData?.estimatedPrice} VNĐ
+                        {formatVNDPrice(courseData?.suggestedPrice)}
                     </h5>
 
                     <h4 className='pl-5 pt-4 text-[22px] dark:text-[#e05353] text-yellow-400'>
@@ -102,12 +108,12 @@ const CoursePreview: FC<Props> = ({
                     </ul>
                     <br />
 
-                    {/* prerequisites */}
+                    {/* requirements */}
                     <h1 className='text-[25px] font-Poppins font-[600]  text-white mt-6'>
                         Bạn cần những gì để có thể học được?
                     </h1>
                     <ul className="list-disc ml-6 dark:text-white text-black">
-                        {courseData?.prerequisites?.map((item: any, index: number) => (
+                        {courseData?.requirements?.map((item: any, index: number) => (
                             <li key={index} className="py-2 flex items-center">
                                 <IoCheckmarkDoneCircleOutline size={20} className="mr-2" />
                                 <span>{item.title}</span>

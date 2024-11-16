@@ -25,7 +25,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
   };
   const { user } = useSelector((state: any) => state.auth);
   const [open, setOpen] = useState(false);
-  const discountPercentage = ((data?.estimatedPrice - data.price) / data.estimatedPrice) * 100;
+  const discountPercentage = ((data?.suggestedPrice - data.price) / data.suggestedPrice) * 100;
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
@@ -80,7 +80,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
               Bạn cần chuẩn bị những kiến thức gì trước khi tham gia khóa học
               này?
             </h1>
-            {data.prerequisites?.map((item: any, index: number) => (
+            {data.requirements?.map((item: any, index: number) => (
               <div className="w-full flex 800px:items-center py-2" key={index}>
                 <div className="w-[15px] mr-1">
                   <IoCheckmarkDoneOutline
@@ -177,11 +177,11 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                   {data.price === 0 ? "Miễn phí" : formatVNDPrice(data.price)}
                 </h1>
                 <h5 className="pl-3 text-[20px] mt-2 line-through opacity-80 text-black dark:text-white">
-                  {data.estimatedPrice}VNĐ
+                  {formatVNDPrice(data.suggestedPrice)}
                 </h5>
 
                 <h4 className="pl-5 pt-4 text-[22px] text-black dark:text-white">
-                  {discountPercentagePrice}% giảm giá
+                  Giảm giá {discountPercentagePrice}%
                 </h4>
               </div>
               <div className="flex items-center">
@@ -204,13 +204,13 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
               <br />
               <p className="pb-1 text-black dark:text-white">
                 {" "}
-                * Cung cấp đầy đủ Source Code
+                → Cung cấp đầy đủ Source Code
               </p>
               <p className="pb-1 text-black dark:text-white">
-                * Không giới hạn thời gian
+                → Không giới hạn thời gian
               </p>
               <p className="pb-1 text-black dark:text-white">
-                * Thêm các công cụ trợ giúp việc học
+                → Thêm các công cụ trợ giúp việc học
               </p>
             </div>
           </div>

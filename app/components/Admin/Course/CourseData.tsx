@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 type Props = {
   benefits: { title: string }[];
   setBenefits: (benefits: { title: string }[]) => void;
-  prerequisites: { title: string }[];
-  setPrerequisites: (prerequisites: { title: string }[]) => void;
+  requirements: { title: string }[];
+  setrequirements: (requirements: { title: string }[]) => void;
   active: number;
   setActive: (active: number) => void;
 };
@@ -15,8 +15,8 @@ type Props = {
 const CourseData: FC<Props> = ({
   benefits,
   setBenefits,
-  prerequisites,
-  setPrerequisites,
+  requirements,
+  setrequirements,
   active,
   setActive,
 }) => {
@@ -30,14 +30,14 @@ const CourseData: FC<Props> = ({
     setBenefits(updatedBenefits);
   };
 
-  const handleAddPrerequisites = () => {
-    setPrerequisites([...prerequisites, { title: "" }]);
+  const handleAddrequirements = () => {
+    setrequirements([...requirements, { title: "" }]);
   };
 
-  const handlePrerequisitesChange = (index: number, value: string) => {
-    const updatedPrerequisites = [...prerequisites];
-    updatedPrerequisites[index].title = value;
-    setPrerequisites(updatedPrerequisites);
+  const handlerequirementsChange = (index: number, value: string) => {
+    const updatedrequirements = [...requirements];
+    updatedrequirements[index].title = value;
+    setrequirements(updatedrequirements);
   };
 
   const prevButton = () => {
@@ -45,7 +45,7 @@ const CourseData: FC<Props> = ({
   }
 
   const handleOptions = () => {
-    if (benefits[benefits.length - 1]?.title !== "" && prerequisites[prerequisites.length - 1]?.title !== "") {
+    if (benefits[benefits.length - 1]?.title !== "" && requirements[requirements.length - 1]?.title !== "") {
       setActive(active + 1);
     } else {
       toast.error("Vui lòng nhập thông tin để tới bước tiếp theo!")
@@ -82,11 +82,11 @@ const CourseData: FC<Props> = ({
 
       {/* Prequire */}
       <div>
-        <label className={style.label} htmlFor="prerequisites">
+        <label className={style.label} htmlFor="requirements">
           Những yêu cầu nào cần thiết để tham gia khóa học này?
         </label>
         <br />
-        {prerequisites.map((prerequisites: any, index: number) => (
+        {requirements.map((requirements: any, index: number) => (
           <input
             type="text"
             key={index}
@@ -94,13 +94,13 @@ const CourseData: FC<Props> = ({
             placeholder="Nắm vững kiến thức cơ bản về React, Javascript, CSS!"
             required
             className={`my-2 input ${style.input}`}
-            value={prerequisites.title}
-            onChange={(e) => handlePrerequisitesChange(index, e.target.value)}
+            value={requirements.title}
+            onChange={(e) => handlerequirementsChange(index, e.target.value)}
           />
         ))}
         <AddCircleIcon
           style={{ margin: "10px 0px", cursor: "pointer", width: "30px" }}
-          onClick={handleAddPrerequisites}
+          onClick={handleAddrequirements}
           className="dark:text-white text-black"
         />
       </div>

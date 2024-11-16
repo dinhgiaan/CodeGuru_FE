@@ -20,7 +20,7 @@ const CreateCourse = (props: Props) => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Tạo khóa học thành công");
-      redirect("/admin");
+      redirect("/admin/courses");
     }
     if (error) {
       if ("data" in error) {
@@ -33,7 +33,7 @@ const CreateCourse = (props: Props) => {
     name: '',
     description: '',
     price: '',
-    estimatedPrice: '',
+    suggestedPrice: '',
     tags: '',
     level: '',
     demoUrl: '',
@@ -41,7 +41,7 @@ const CreateCourse = (props: Props) => {
   });
 
   const [benefits, setBenefits] = useState([{ title: '' }]);
-  const [prerequisites, setPrerequisites] = useState([{ title: '' }]);
+  const [requirements, setrequirements] = useState([{ title: '' }]);
   const [courseContentData, setCourseContentData] = useState([
     {
       videoUrl: '',
@@ -64,8 +64,8 @@ const CreateCourse = (props: Props) => {
     // format benefits
     const formatBenefits = benefits.map((benefits) => ({ title: benefits.title }));
 
-    // format prerequisites
-    const formatPrerequisites = prerequisites.map((prerequisites) => ({ title: prerequisites.title }));
+    // format requirements
+    const formatRequirements = requirements.map((requirements) => ({ title: requirements.title }));
 
     // format courseContentData
     const formatCourseContentData = courseContentData.map((courseContent) => ({
@@ -85,15 +85,15 @@ const CreateCourse = (props: Props) => {
       name: courseInfo.name,
       description: courseInfo.description,
       price: courseInfo.price,
-      estimatedPrice: courseInfo.estimatedPrice,
+      suggestedPrice: courseInfo.suggestedPrice,
       tags: courseInfo.tags,
       thumbnail: courseInfo.thumbnail,
       level: courseInfo.level,
       demoUrl: courseInfo.demoUrl,
       totalVideos: courseContentData.length,
       benefits: formatBenefits,
-      prerequisites: formatPrerequisites,
-      courseContent: formatCourseContentData,
+      requirements: formatRequirements,
+      courseData: formatCourseContentData,
     };
     setCourseData(data);
   };
@@ -124,8 +124,8 @@ const CreateCourse = (props: Props) => {
           <CourseData
             benefits={benefits}
             setBenefits={setBenefits}
-            prerequisites={prerequisites}
-            setPrerequisites={setPrerequisites}
+            requirements={requirements}
+            setrequirements={setrequirements}
             active={active}
             setActive={setActive}
           />

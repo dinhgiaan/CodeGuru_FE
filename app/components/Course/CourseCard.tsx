@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Rating from '@/app/utils/Rating';
+import { AiOutlineUnorderedList } from 'react-icons/ai';
 type Props = {
     item: any;
     isProfile?: boolean;
@@ -16,9 +17,16 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
     };
     return (
         <Link href={!isProfile ? `/course/${item._id}` : `course-access/${item._id}`}>
-            <div className="w-full min-h-[40vh] bg-gray-200 dark:bg-slate-500 border rounded-lg p-3 shadow-sm">
-                <div className='w-full h-52 flex justify-center items-center overflow-hidden rounded'>
-                    <Image src={item.thumbnail.url} width={500} height={300} objectFit="contain" className="rounded w-full" alt="" />
+            <div className="w-full min-h-[45vh] bg-gray-200 dark:bg-cyan-800 border rounded-md p-3 shadow-sm">
+                <div className='w-full h-52 flex justify-center items-center overflow-hidden rounded pb-9'>
+                    <Image
+                        src={item.thumbnail.url}
+                        width={500}
+                        height={300}
+                        objectFit="cover"
+                        className="rounded w-full"
+                        alt=""
+                    />
                     <br />
                 </div>
                 <h1 className="font-Poppins text-[16px] text-black dark:text-white">
@@ -28,7 +36,7 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
                     <Rating rating={item.rating} />
                     <h5 className={`text-black dark:text-white ${isProfile && "hidden 800px:inline"
                         }`}>
-                        {item.purchased} Học viên đã học
+                        {item.purchased} học viên đã học
                     </h5>
                 </div>
                 <div className="w-full flex items-center justify-between pt-3">
@@ -40,7 +48,12 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
                             {formatVNDPrice(item.suggestedPrice)}
                         </h5>
                     </div>
-
+                    <div className='flex items-center pb-3'>
+                        <AiOutlineUnorderedList size={20} fill='#fff' />
+                        <h5 className='pl-2 text-black dark:text-[#fff]'>
+                            {item.courseData?.length} chương
+                        </h5>
+                    </div>
                 </div>
             </div>
         </Link>

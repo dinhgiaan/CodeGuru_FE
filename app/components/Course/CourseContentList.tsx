@@ -16,10 +16,10 @@ const CourseContentList: FC<Props> = (props) => {
 
   // tìm video từng phần video
   const videoSections: string[] = [
-    ...new Set<string>(props.data?.map((item: any) => item.videoSection)),
+    ...new Set<string>(props.data?.map((item: any) => item.videoSection))
   ];
 
-  let totalCount: number = 0; // tính tổng video hiện có của kháo học
+  let totalCount: number = 0; // tính tổng video hiện có của khóa học
 
   const toggleSection = (section: string) => {
     const newVisibleSections = new Set(visibleSections);
@@ -76,7 +76,7 @@ const CourseContentList: FC<Props> = (props) => {
               </div>
             </div>
             <h5 className="text-black dark:text-white">
-              {sectionVideoCount} bài giảng .{" "}
+              {sectionVideoCount} bài giảng ─ {""}
               {sectionVideoLength < 60
                 ? sectionVideoLength
                 : sectionContentHours.toFixed(2)}{" "}
@@ -106,6 +106,9 @@ const CourseContentList: FC<Props> = (props) => {
                           />
                         </div>
                         <h1 className="text-[18px] inline-block break-words text-black dark:text-white"></h1>
+                        <span className=" text-black dark:text-white">
+                          {item.title}
+                        </span>
                       </div>
                       <h5 className="pl-8 text-black dark:text-white">
                         {item.videoLength > 60
