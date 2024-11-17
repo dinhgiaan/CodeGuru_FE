@@ -7,6 +7,7 @@ import Courses from "./components/Route/Courses"
 import Footer from './components/Footer';
 import Feedback from './components/Route/Feedback';
 import Partner from './components/Route/Partner';
+import FAQ from "./components/FAQ/FAQ"
 
 interface Props {
      className: string,
@@ -35,6 +36,7 @@ const Page: FC<Props> = (props) => {
                     <Courses />
                     <Partner />
                     <Feedback />
+                    <FAQ />
                     <Footer />
                </div>
           </>
