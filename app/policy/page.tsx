@@ -15,7 +15,7 @@ const page = (props: Props) => {
         <>
             <div className='flex flex-col min-h-screen'>
                 <Heading
-                    title="Giới thiệu về CodeGuru"
+                    title="Chính sách của CodeGuru"
                     description='CodeGuru là trang web cung cấp các khóa học đa dạng'
                     keywords='Programming, MERN, Redux, LMS'
                 />
