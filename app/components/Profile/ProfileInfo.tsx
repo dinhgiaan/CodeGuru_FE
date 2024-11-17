@@ -63,74 +63,66 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
 
     return (
         <>
-            <div className="w-full flex justify-center">
-                <div className="relative">
-                    {loading
-                        ?
-                        (
+            <div className="w-full max-w-4xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                {/* Avatar Section */}
+                <div className="flex flex-col items-center">
+                    <div className="relative">
+                        {loading ? (
                             <Loader />
-                        )
-                        :
-                        (
+                        ) : (
                             <Image
                                 src={user && user.avatar && typeof user.avatar.url === "string" ? user.avatar.url : avatarIcon}
                                 alt="avatar"
                                 width={120}
                                 height={120}
-                                className="w-[120px] h-[120px] cursor-pointer border-[3px] border-[#37a39a] rounded-full"
+                                className="w-[120px] h-[120px] border-4 border-teal-500 rounded-full object-cover"
                                 priority
                             />
                         )}
-                    <input
-                        type="file"
-                        name=""
-                        id="avatar"
-                        className="hidden"
-                        onChange={imageHandler}
-                        accept="image/png,image/jpg,image/jpeg,image/webp/gif"
-                    />
-                    <label htmlFor="avatar">
-                        <div className="w-[30px] bg-slate-900 rounded-full absolute bottom-2 right-2 flex items-center justify-center cursor-pointer">
-                            <AiOutlineCamera size={20} className="z-1 text-black dark:text-white" />
-                        </div>
-                    </label>
-                </div>
-            </div>
-            <br />
-            <br />
-            <div className="w-full pl-6 800px:pl-10">
-                <form onSubmit={handleSubmit}>
-                    <div className="800px:w-[50%] m-auto block pb-4">
-                        <div className="w-[100%]">
-                            <label className='${style.label} text-black dark:text-white'>Họ và tên</label>
-                            <input
-                                type="text"
-                                className={`{w-full text-black dark:text-white bg-transparent border rounded-h-[40px] px-2 outline-none mt-[10px] font-Poppins} !w-[95%] mb-4 800px:mb-0`}
-                                required
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="w-[100%] pt-2">
-                            <label className='${style.label} text-black dark:text-white'>Địa chỉ Email</label>
-                            <input
-                                type="text"
-                                readOnly
-                                className={`{w-full text-black dark:text-white bg-transparent border rounded-h-[40px] px-2 outline-none mt-[10px] font-Poppins} !w-[95%] mb-1 800px:mb-0`}
-                                required
-                                value={user?.email}
-                            />
-                        </div>
                         <input
-                            className={`w-full 800px:w-[250px] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer`}
+                            type="file"
+                            id="avatar"
+                            className="hidden"
+                            onChange={imageHandler}
+                            accept="image/png,image/jpg,image/jpeg,image/webp,gif"
+                        />
+                        <label htmlFor="avatar">
+                            <div className="absolute bottom-2 right-2 w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center cursor-pointer">
+                                <AiOutlineCamera size={20} className="text-white" />
+                            </div>
+                        </label>
+                    </div>
+                    <h3 className="text-lg font-semibold mt-4 text-gray-700 dark:text-gray-200">{user?.email}</h3>
+                </div>
+
+                {/* Form Section */}
+                <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Họ và tên</label>
+                        <input
+                            type="text"
+                            className="mt-1 block w-full px-4 py-2 text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                             required
-                            value="Cập nhật"
-                            type="submit"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </div>
-
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Địa chỉ Email</label>
+                        <input
+                            type="text"
+                            readOnly
+                            className="mt-1 block w-full px-4 py-2 text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none"
+                            value={user?.email}
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-md font-semibold transition"
+                    >
+                        Cập nhật
+                    </button>
                 </form>
-                <br />
             </div>
         </>
     )

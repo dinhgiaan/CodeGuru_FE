@@ -67,7 +67,7 @@ const SideBarProfile: FC<Props> = ({
 
       {user.role === "admin" && (
         <Link
-          className={`w-full flex items-center px-3 py-4 cursor-pointer ${active === 3 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
+          className={`w-full flex items-center px-3 py-4 cursor-pointer ${active === 4 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
             }`}
           href={"/admin"}
         >
@@ -78,7 +78,7 @@ const SideBarProfile: FC<Props> = ({
         </Link>
       )}
       <div
-        className={`w-full flex items-center px-3 py-4 cursor-pointer ${active === 4 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
+        className={`w-full flex items-center px-3 py-4 cursor-pointer ${active === 5 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
           }`}
         onClick={() => logOutHandler()}
       >

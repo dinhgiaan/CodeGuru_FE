@@ -22,6 +22,9 @@ const ChangePassword: FC<Props> = (props) => {
     useEffect(() => {
         if (isSuccess) {
             toast.success("Đổi mật khẩu thành công");
+            setOldPassword('');
+            setNewPassword('');
+            setConfirmPassword('');
         }
         if (error) {
             if ("data" in error) {
@@ -33,56 +36,54 @@ const ChangePassword: FC<Props> = (props) => {
 
 
     return (
-        <div className="w-full pl-7 px-2 800px:px-5 800px:pl-0">
-            <h1 className="block text-[25px] 800px:text-[30px] font-Poppins text-center font-[500] text-black dark:text-white pb-2">
-                Đổi mật khẩu
-            </h1>
-            <div className="w-full">
-                <form
-                    aria-required
-                    onSubmit={passwordChangeHandler}
-                    className="flex flex-col items-center"
+        <div className="w-full flex flex-col items-center px-5 py-10">
+            <form
+                onSubmit={passwordChangeHandler}
+                className="w-full max-w-md bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 space-y-6"
+            >
+                <div className="flex flex-col">
+                    <label className="text-gray-700 dark:text-gray-300 font-medium">
+                        Nhập mật khẩu cũ
+                    </label>
+                    <input
+                        type="password"
+                        className="mt-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-700"
+                        required
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col">
+                    <label className="text-gray-700 dark:text-gray-300 font-medium">
+                        Nhập mật khẩu mới
+                    </label>
+                    <input
+                        type="password"
+                        className="mt-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-700"
+                        required
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col">
+                    <label className="text-gray-700 dark:text-gray-300 font-medium">
+                        Nhập lại mật khẩu mới
+                    </label>
+                    <input
+                        type="password"
+                        className="mt-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-700"
+                        required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className="w-full py-2 px-4 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400"
                 >
-                    <div className="w-[100%] 800px:w-[60%] mt-5">
-                        <label className="block pb-2 text-black dark:text-white">Nhập mật khẩu cũ</label>
-                        <input
-                            type="password"
-                            className={`{w-full text-black dark:text-white bg-transparent border rounded-h-[40px] px-2 outline-none mt-[10px] font-Poppins} !w-[95%] mb-4 800px:mb-0`}
-                            required
-                            value={oldPassword}
-                            onChange={(e) => setOldPassword(e.target.value)}
-
-                        />
-                    </div>
-                    <div className="w-[100%] 800px:w-[60%] mt-2">
-                        <label className="block pb-2 text-black dark:text-white">Nhập mật khẩu mới</label>
-                        <input
-                            type="password"
-                            className={`{w-full text-black dark:text-white bg-transparent border rounded-h-[40px] px-2 outline-none mt-[10px] font-Poppins} !w-[95%] mb-4 800px:mb-0`}
-                            required
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-
-                        />
-                    </div>
-                    <div className="w-[100%] 800px:w-[60%] mt-2">
-                        <label className="block pb-2 text-black dark:text-white ">Nhập lại mật khẩu mới</label>
-                        <input
-                            type="password"
-                            className={`{w-full text-black dark:text-white bg-transparent border rounded-h-[40px] px-2 outline-none mt-[10px] font-Poppins} !w-[95%] mb-4 800px:mb-0`}
-                            required
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        <input className={`w-[95%] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer`}
-                            required
-                            value="Đổi mật khẩu"
-                            type="submit"
-                        />
-                    </div>
-                </form>
-
-            </div>
+                    Đổi mật khẩu
+                </button>
+            </form>
         </div>
     )
 }
