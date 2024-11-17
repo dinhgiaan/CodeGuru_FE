@@ -20,7 +20,7 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="space-y-4">
                         <div className="flex items-center space-x-2">
-                            <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">
+                            <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#91e2e5] to-[#baccef]">
                                 CodeGuru
                             </h2>
                         </div>
@@ -51,7 +51,7 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-lg font-bold mb-4 text-yellow-400">Khám phá</h3>
+                        <h3 className="text-lg font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#91e2e5] to-[#baccef]">Khám phá</h3>
                         <ul className="space-y-3">
                             <li>
                                 <Link href="/course" className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 flex items-center">
@@ -68,7 +68,7 @@ const Footer = () => {
 
                     {/* Support Links */}
                     <div>
-                        <h3 className="text-lg font-bold mb-4 text-yellow-400">Hỗ trợ</h3>
+                        <h3 className="text-lg font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#91e2e5] to-[#baccef]">Hỗ trợ</h3>
                         <ul className="space-y-3">
                             <li>
                                 <Link href="/faq" className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 flex items-center">
@@ -85,18 +85,18 @@ const Footer = () => {
 
                     {/* Contact Information */}
                     <div>
-                        <h3 className="text-lg font-bold mb-4 text-yellow-400">Liên hệ</h3>
+                        <h3 className="text-lg font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#91e2e5] to-[#baccef]">Liên hệ</h3>
                         <ul className="space-y-3">
                             <li className="flex items-center text-gray-400">
-                                <FaMapMarkerAlt className="mr-3 text-yellow-400" />
+                                <FaMapMarkerAlt className="mr-3 text-green-400" />
                                 <span>806 Quốc lộ 22, Ấp Mỹ Hòa 3, Xã Tân Xuân, Huyện Hóc Môn, Thành phố Hồ Chí Minh.</span>
                             </li>
                             <li className="flex items-center text-gray-400">
-                                <FaPhone className="mr-3 text-yellow-400" />
+                                <FaPhone className="mr-3 text-green-400" />
                                 <span>+84 856 562 424</span>
                             </li>
                             <li className="flex items-center text-gray-400">
-                                <FaEnvelope className="mr-3 text-yellow-400" />
+                                <FaEnvelope className="mr-3 text-green-400" />
                                 <span>support@codeguru.com</span>
                             </li>
                         </ul>

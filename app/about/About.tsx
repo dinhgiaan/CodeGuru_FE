@@ -5,7 +5,7 @@ type Props = {}
 
 const About = (props: Props) => {
     return (
-        <div className="text-black dark:text-white">
+        <div className="text-black dark:text-white font-Roboto">
             <br />
             <h1 className={`${style.title} 800px:!text-[45px]`}>
                 Khám phá <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">CodeGuru</span>
@@ -39,7 +39,7 @@ const About = (props: Props) => {
                 <br />
                 <span className="text-[22px] font-semibold">Đinh Gia Ân,</span>
                 <h5 className="text-[18px] font-Poppins">
-                    Người sáng lập và CEO của CodeGuru
+                    Người sáng lập và CEO của CodeGuru.
                 </h5>
                 <br />
                 <br />

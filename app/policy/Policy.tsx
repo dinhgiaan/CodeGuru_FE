@@ -5,7 +5,7 @@ type Props = {}
 
 const Policy = (props: Props) => {
     return (
-        <div className="text-black dark:text-white">
+        <div className="text-black dark:text-white font-Roboto">
             <br />
             <h1 className={`${style.title} 800px:!text-[45px]`}>
                 Chính sách tại <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">CodeGuru</span>
@@ -25,7 +25,7 @@ const Policy = (props: Props) => {
                 </ul>
                 <br />
                 <p className="text-[18px] font-Poppins">
-                    Với phương châm “Học để thành công,” <strong>CodeGuru</strong> luôn nỗ lực mang đến những giá trị vượt ngoài mong đợi.
+                    Với phương châm “Học để thành công”, <strong>CodeGuru</strong> luôn nỗ lực mang đến những giá trị vượt ngoài mong đợi.
                     Chúng tôi không chỉ là nền tảng học lập trình, mà còn là người bạn đồng hành trên chặng đường chinh phục tri thức và sự nghiệp của bạn.
                 </p>
                 <br />
