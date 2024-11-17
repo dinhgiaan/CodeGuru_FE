@@ -61,7 +61,7 @@ const SideBarProfile: FC<Props> = ({
       >
         <SiCoursera size={20} className="text-black dark:text-white" />
         <h5 className="pl-2 800px:block hidden font-Poppins text-black dark:text-white">
-          Khóa học đã học
+          Các khóa học đã học
         </h5>
       </div>
 
