@@ -49,7 +49,7 @@ const CourseDetailsPage = ({ id }: Props) => {
           <Heading
             title={
               data?.course?.name
-                ? `${data.course.name} - CodeGuru`
+                ? `Khóa học: ${data.course.name}`
                 : "Đang tải..."
             }
             description="CodeGuru là trang web cung cấp các khóa học đa dạng"

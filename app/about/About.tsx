@@ -8,32 +8,33 @@ const About = (props: Props) => {
         <div className="text-black dark:text-white">
             <br />
             <h1 className={`${style.title} 800px:!text-[45px]`}>
-                Giới thiệu về <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text"> CodeGuru</span>
+                Khám phá <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">CodeGuru</span>
             </h1>
             <br />
-            <div className="w-[95%] 800px:w-[85%] m-auto">
+            <div className="w-[95%] 800px:w-[85%] m-auto leading-[1.8]">
                 <p className="text-[18px] font-Poppins">
-                    Bạn đang tìm cách nâng cao kỹ năng lập trình của mình?
-                    Hãy đến với CodeGuru – nền tảng học lập trình hàng đầu, nơi cung cấp các khóa học chất lượng cao với mức giá phải chăng,
-                    giúp bạn chinh phục đỉnh cao trong ngành lập trình. Với đội ngũ giảng viên giàu kinh nghiệm và tài nguyên phong phú,
-                    CodeGuru cam kết mang đến cho người học một hành trình học tập đầy hứng khởi và hiệu quả.
-                    <br />
-                    <br />
-                    Chúng tôi tin rằng học lập trình không chỉ là việc nắm vững ngôn ngữ hay công cụ mà còn là sự chuẩn bị để đạt được những mục tiêu và phát triển sự nghiệp trong ngành công nghệ.
-                    Tại CodeGuru, mọi khóa học đều được thiết kế cẩn thận để phù hợp với cả người mới bắt đầu và những người đã có kinh nghiệm.
-                    Cùng với cộng đồng lập trình viên sôi nổi, bạn sẽ luôn có sự hỗ trợ và nguồn động lực để tiến xa hơn.
-                    <br />
-                    <br />
-                    Tại CodeGuru, chúng tôi hiểu rằng con đường học tập lập trình có thể đầy thách thức.
-                    Vì thế, mọi khóa học đều được thiết kế chi tiết, dễ hiểu và đi kèm với các bài tập thực hành thực tế, giúp bạn nhanh chóng nắm vững kiến thức và áp dụng vào công việc.
-                    Dù bạn là người mới bắt đầu hay đã có nền tảng vững chắc, codeGuru đều có lộ trình phù hợp với nhu cầu và mục tiêu của bạn.
-                    <br />
-                    <br />
-                    Ngoài các khóa học, chúng tôi còn xây dựng một cộng đồng lập trình viên sôi nổi, nơi bạn có thể học hỏi, chia sẻ kiến thức, và nhận được sự hỗ trợ từ các thành viên khác.
-                    CodeGuru không chỉ là nơi để học, mà còn là ngôi nhà chung cho những ai đam mê công nghệ và mong muốn phát triển bản thân.
-                    <br />
-                    <br />
-                    Hãy tham gia CodeGuru ngay hôm nay để bắt đầu hành trình của bạn trong ngành lập trình và khai phá tiềm năng của bản thân mà không cần lo lắng về chi phí. Chúng tôi ở đây để đồng hành cùng bạn trên con đường chinh phục những thử thách và vươn tới thành công!
+                    Trong kỷ nguyên công nghệ hiện đại, việc sở hữu kỹ năng lập trình không chỉ mang đến cơ hội nghề nghiệp rộng mở,
+                    mà còn là chìa khóa để bạn chinh phục những thử thách mới và định hình tương lai của chính mình.
+                    <strong>CodeGuru</strong> tự hào là nền tảng học lập trình hàng đầu, nơi tập hợp các khóa học chất lượng cao được thiết kế bởi đội ngũ chuyên gia giàu kinh nghiệm,
+                    nhằm mang đến một hành trình học tập không chỉ hiệu quả mà còn đầy cảm hứng và sáng tạo.
+                </p>
+                <br />
+                <p className="text-[18px] font-Poppins">
+                    Tại <strong>CodeGuru</strong>, chúng tôi tin rằng mỗi người học đều là một cá nhân duy nhất với nhu cầu và mục tiêu riêng biệt.
+                    Vì vậy, chúng tôi xây dựng các khóa học theo lộ trình linh hoạt, phù hợp cho cả người mới bắt đầu và những lập trình viên dày dạn kinh nghiệm.
+                    Từ các bài giảng chi tiết đến các bài tập thực hành thực tế, bạn sẽ luôn nhận được sự hỗ trợ tận tình từ đội ngũ giảng viên và cộng đồng lập trình viên sôi nổi,
+                    giúp bạn nhanh chóng nắm vững kiến thức và áp dụng thành công vào công việc thực tiễn.
+                </p>
+                <br />
+                <p className="text-[18px] font-Poppins">
+                    Tham gia <strong>CodeGuru</strong>, bạn không chỉ học lập trình mà còn trở thành một phần của cộng đồng đam mê công nghệ,
+                    nơi bạn có thể kết nối, học hỏi và chia sẻ kinh nghiệm với hàng ngàn lập trình viên khác.
+                    Đây không chỉ là nền tảng học tập, mà còn là ngôi nhà chung của những người yêu thích sáng tạo, đổi mới, và khát khao phát triển.
+                </p>
+                <br />
+                <p className="text-[18px] font-Poppins">
+                    Hãy để <strong>CodeGuru</strong> đồng hành cùng bạn trên con đường khai phá tiềm năng bản thân và xây dựng sự nghiệp đáng mơ ước trong lĩnh vực công nghệ.
+                    Đừng chần chừ, bởi thành công bắt đầu từ quyết định hôm nay!
                 </p>
                 <br />
                 <span className="text-[22px] font-semibold">Đinh Gia Ân,</span>
@@ -44,7 +45,6 @@ const About = (props: Props) => {
                 <br />
                 <br />
             </div>
-
         </div>
     )
 }

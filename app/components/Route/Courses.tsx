@@ -15,11 +15,11 @@ const Courses = (props: Props) => {
     return (
         <div>
             <div className={`w-[90%] 800px:w-[80%] m-auto`}>
-                <h1 className="text-center font-Poppins text-[25px] leading-[35px] sm:text-3xl lg:text-4xl dark:text-white 800px:!leading-[60px] text-[#000] font-[700] tracking-tight" >
-                    Mở rộng sự nghiệp của bạn {" "}
-                    <span className="bg-gradient-to-r from-yellow-400 to-pink-500 text-transparent bg-clip-text">Cơ hội</span>
+                <h1 className="text-center font-Roboto text-[25px] leading-[35px] sm:text-3xl lg:text-4xl dark:text-white 800px:!leading-[60px] text-[#000] font-[700] tracking-tight" >
+                    Định hình tương lai sự nghiệp của bạn {" "}
+                    <span className="bg-gradient-to-r from-yellow-400 to-pink-500 text-transparent bg-clip-text">với cơ hội không giới hạn</span>
                     <br />
-                    Cơ hội với khóa học của chúng tôi
+                    Hãy bứt phá cùng các khóa học được thiết kế dành riêng cho bạn
                 </h1>
                 <br />
                 <br />
