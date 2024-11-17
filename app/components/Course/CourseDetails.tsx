@@ -29,7 +29,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased = user && user.courses?.find((item: any) => item._id === data._id);
+  const isPurchased = user && user?.courses?.find((item: any) => data.courseId === data.courseId);
   const handleOrder = (e: any) => {
     setOpen(true);
   };
@@ -190,7 +190,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                     className={`${style.button} w-[180px] my-3 font-Poppins cursor-pointer bg-[#DC143C]`}
                     href={"/course-access/${data._id}"}
                   >
-                    Đồng ý
+                    Vào học
                   </Link>
                 ) : (
                   <div
