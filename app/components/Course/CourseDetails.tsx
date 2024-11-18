@@ -5,10 +5,10 @@ import Link from "next/link";
 import { format } from "timeago.js";
 import React, { useState } from "react";
 import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
 import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../Payment/CheckoutForm";
+import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 
 type Props = {
   data: any;
@@ -23,13 +23,14 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
       currency: 'VND'
     }).format(price);
   };
-  const { user } = useSelector((state: any) => state.auth);
+  const { data: userData } = useLoadUserQuery(undefined, {});
+  const user = userData?.user;
   const [open, setOpen] = useState(false);
   const discountPercentage = ((data?.suggestedPrice - data.price) / data.suggestedPrice) * 100;
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased = user && user?.courses?.find((data: any) => data.courseId === data.courseId);
+  const isPurchased = user && user?.courses?.find((item: any) => data.courseId === data.courseId);
   const handleOrder = (e: any) => {
     setOpen(true);
   };
@@ -188,7 +189,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                 {isPurchased ? (
                   <Link
                     className={`${style.button} w-[180px] my-3 font-Poppins cursor-pointer bg-[#DC143C]`}
-                    href={"/course-access/${data._id}"}
+                    href={`/course-access/${data._id}`}
                   >
                     Vào học
                   </Link>

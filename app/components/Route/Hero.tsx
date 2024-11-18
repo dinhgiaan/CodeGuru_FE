@@ -12,11 +12,13 @@ const Hero: FC<Props> = (props) => {
             <div className="relative w-full h-[50vh] sm:h-[600px] lg:h-[700px] bg-gradient-to-r from-[#a6e5e1] to-[#cbd6f1] dark:bg-gradient-to-r dark:from-[#100e0f] dark:to-[#121313]">
                 <div className="flex flex-col-reverse lg:flex-row items-center justify-between pt-[70px] lg:pt-0 z-10 relative">
                     <div className="relative w-full min-h-screen lg:w-[40%] flex items-center justify-start">
-                        <Image
-                            src={require("../../../public/assets/banner.png")}
-                            alt=""
-                            className="object-contain w-[90%] lg:max-w-[90%] xl:max-w-[90%] h-auto z-10 left-12 relative"
-                        />
+                        <div className="w-full max-w-lg mx-auto">
+                            <img
+                                src="https://www.becodemy.com/_next/static/media/banner.8a9f498b.svg"
+                                alt="Banner"
+                                className="w-full h-auto"
+                            />
+                        </div>
                     </div>
 
                     <div className="flex flex-col items-center text-center lg:text-left lg:w-[50%] lg:pr-[40px] lg:mr-[20px] mt-[150px] lg:mt-0">

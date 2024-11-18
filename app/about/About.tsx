@@ -11,7 +11,7 @@ const About = () => {
         {
             icon: <Users className="w-8 h-8 text-purple-500" />,
             title: "Cộng đồng sôi nổi",
-            description: "Kết nối và học hỏi cùng hàng nghìn lập trình viên khác"
+            description: "Kết nối và học hỏi cùng hàng ngàn lập trình viên khác"
         },
         {
             icon: <Brain className="w-8 h-8 text-blue-500" />,

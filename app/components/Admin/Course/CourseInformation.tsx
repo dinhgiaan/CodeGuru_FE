@@ -117,7 +117,7 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, price: e.target.value })
               }
               id="price"
-              placeholder="1.499.000 VNĐ"
+              placeholder="1.499.000"
               className={style.input}
             />
           </div>
@@ -133,7 +133,7 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, suggestedPrice: e.target.value })
               }
               id="suggestedPrice"
-              placeholder="2.499.000 VNĐ"
+              placeholder="2.499.000"
               className={style.input}
             />
           </div>

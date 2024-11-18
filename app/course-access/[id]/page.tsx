@@ -1,43 +1,50 @@
 'use client'
-
-import CourseContent from '@/app/components/Course/CourseContent'
-import Loader from '@/app/components/Loader/Loader'
-import { useLoadUserQuery } from '@/redux/features/api/apiSlice'
-import { redirect } from 'next/navigation'
-import React, { useEffect } from 'react'
+import CourseContent from '@/app/components/Course/CourseContent';
+import Loader from '@/app/components/Loader/Loader';
+import { useLoadUserQuery } from '@/redux/features/api/apiSlice';
+import { redirect } from 'next/navigation';
+import React, { useEffect } from 'react';
 
 type Props = {
-    params: any
-}
+    params: any;
+};
 
-const page = ({ params }: Props) => {
-    const id = params.id;
+const Page = ({ params }: Props) => {
+    const id = params.id; // ID khóa học từ URL
     const { isLoading, error, data } = useLoadUserQuery(undefined, {});
 
     useEffect(() => {
-        if (data) {
-            const isPurchased = data.user.courses.find((item: any) => item._id === id);
+        if (isLoading || error) return; // Chờ dữ liệu hoặc xử lý lỗi
+
+        if (data && data.user && Array.isArray(data.user.courses)) {
+            // Tìm khóa học dựa trên courseId
+            const isPurchased = data.user.courses.find(
+                (course: any) => String(course.courseId) === String(id)
+            );
+
+            console.log("Khóa học đã mua: ", isPurchased);
+
             if (!isPurchased) {
-                redirect("/");
+                console.warn("Khóa học không tìm thấy, chuyển hướng về trang chủ...");
+                redirect('/');
             }
-            if (error) {
-                redirect("/");
-            }
+        } else {
+            console.warn("Không có dữ liệu khóa học hoặc cấu trúc không đúng.");
+            redirect('/');
         }
-    }, [data, error]);
+    }, [data, id, isLoading, error]);
+
     return (
         <>
-            {
-                isLoading ? (
-                    <Loader />
-                ) : (
-                    <div>
-                        <CourseContent id={id} />
-                    </div>
-                )
-            }
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <div>
+                    <CourseContent id={id} />
+                </div>
+            )}
         </>
-    )
-}
+    );
+};
 
-export default page
+export default Page;

@@ -211,12 +211,26 @@ const CourseContent: FC<Props> = ({
                                             <label className={style.label}>URL Video</label>
                                             <input
                                                 type='text'
-                                                placeholder='https://cmccloud.vn/'
+                                                placeholder='8391ad94ab9a19478c7d1f5fbff76999'
                                                 className={style.input}
                                                 value={item.videoUrl}
                                                 onChange={(e) => {
                                                     const updateData = [...courseContentData];
                                                     updateData[index].videoUrl = e.target.value;
+                                                    setCourseContentData(updateData);
+                                                }}
+                                            />
+                                        </div>
+                                        <div className='my-3'>
+                                            <label className={style.label}>Thời gian của bài học</label>
+                                            <input
+                                                type='number'
+                                                placeholder='45'
+                                                className={style.input}
+                                                value={item.videoLength}
+                                                onChange={(e) => {
+                                                    const updateData = [...courseContentData];
+                                                    updateData[index].videoLength = e.target.value;
                                                     setCourseContentData(updateData);
                                                 }}
                                             />

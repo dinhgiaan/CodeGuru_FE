@@ -20,6 +20,11 @@ const FAQ = () => {
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
             <div className="max-w-4xl mx-auto px-4">
+                <div className='text-center'>
+                    <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 mb-4">
+                        FAQ
+                    </span>
+                </div>
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white relative inline-block">

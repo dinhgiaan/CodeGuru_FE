@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-scree">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       {/* Logo Text */}
       <div className="mb-8 relative">
         <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text">

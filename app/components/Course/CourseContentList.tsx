@@ -78,9 +78,10 @@ const CourseContentList: FC<Props> = (props) => {
             <h5 className="text-black dark:text-white">
               {sectionVideoCount} bài giảng ─ {""}
               {sectionVideoLength < 60
-                ? sectionVideoLength
-                : sectionContentHours.toFixed(2)}{" "}
-              {sectionVideoLength > 60 ? "giờ" : "phút"}
+                ? `${sectionVideoLength} phút`
+                : sectionVideoLength / 60 > 2
+                  ? `${Math.round(sectionVideoLength / 60)} giờ`
+                  : `${(sectionVideoLength / 60).toFixed(1)} giờ`}
             </h5>
             <br />
             {isSectionVisible && (
@@ -111,10 +112,11 @@ const CourseContentList: FC<Props> = (props) => {
                         </span>
                       </div>
                       <h5 className="pl-8 text-black dark:text-white">
-                        {item.videoLength > 60
-                          ? contentLength.toFixed(2)
-                          : item.videoLength}{" "}
-                        {item.videoLength > 60 ? "giờ" : "phút"}
+                        {item.videoLength < 60
+                          ? `${item.videoLength} phút`
+                          : item.videoLength / 60 > 2
+                            ? `${Math.round(item.videoLength / 60)} giờ`
+                            : `${(item.videoLength / 60).toFixed(1)} giờ`}
                       </h5>
                     </div>
                   );

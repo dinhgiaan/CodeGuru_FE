@@ -62,7 +62,7 @@ const CheckoutForm = ({ setOpen, data }: Props) => {
         className="btn btn-primary w-full mt-10 pb-3"
       >
         <span id="button-text" className='w-full py-3 px-8 bg-blue-500 rounded-full text-gray-100 hover:bg-blue-700'>
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Thanh toán ngay"}
+          {isLoading ? "Đang thanh toán..." : "Thanh toán ngay"}
         </span>
       </button>
       {message && <div id="payment-message">{message}</div>}

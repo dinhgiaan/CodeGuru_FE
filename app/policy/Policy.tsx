@@ -86,7 +86,7 @@ const Policy = () => {
 
                     {/* Benefits List */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {['Truy cập trọn đời', 'Chứng chỉ có giá trị', 'Học theo lộ trình', 'Bài tập thực tế'].map((benefit, index) => (
+                        {['Truy cập trọn đời', 'Giải đáp nhanh chóng', 'Học theo lộ trình', 'Bài tập thực tế'].map((benefit, index) => (
                             <div key={index} className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
                                 <CheckCircle className="w-5 h-5 text-green-500" />
                                 <span>{benefit}</span>
