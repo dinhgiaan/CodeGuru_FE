@@ -29,7 +29,7 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased = user && user?.courses?.find((item: any) => data.courseId === data.courseId);
+  const isPurchased = user && user?.courses?.find((data: any) => data.courseId === data.courseId);
   const handleOrder = (e: any) => {
     setOpen(true);
   };

@@ -1,15 +1,10 @@
-import { style } from '@/app/styles/style';
+import React, { useEffect, useState } from 'react';
 import { useGetHeroDataQuery } from '@/redux/features/layout/layoutApi';
-import React, { useEffect, useState } from 'react'
-import { HiMinus, HiPlus } from 'react-icons/hi';
+import { ChevronDown, ChevronUp, Search } from 'lucide-react';
 
-type Props = {}
-
-const FAQ = (props: Props) => {
-    const { data } = useGetHeroDataQuery("FAQ", {
-
-    })
-    const [activeQuestion, setActiveQuestion] = useState(null);
+const FAQ = () => {
+    const { data } = useGetHeroDataQuery("FAQ");
+    const [activeQuestion, setActiveQuestion] = useState<string | null>(null);
     const [questions, setQuestions] = useState<any[]>([]);
 
     useEffect(() => {
@@ -18,57 +13,63 @@ const FAQ = (props: Props) => {
         }
     }, [data]);
 
-    const toggleQuestion = (id: any) => {
+    const toggleQuestion = (id: string) => {
         setActiveQuestion(activeQuestion === id ? null : id);
-    }
+    };
+
     return (
-        <div>
-            <div className="w-[90%] 800px:w-[80%] m-auto">
-                <h1 className={`${style.title} 800px:text-[40px]`}>
-                    Những câu hỏi thường gặp
-                </h1>
-                <div className="mt-12">
-                    <dl className="space-y-8">
-                        {questions.map((q) => (
-                            <div key={q.id}
-                                className={`${q._id !== questions[0]?._id && "border-t"} border-gray-200 pt-6`}
-                            >
-                                <dt className="text-lg">
-                                    <button className="flex items-start justify-between w-full text-left focus:outline-none"
-                                        onClick={() => toggleQuestion(q._id)}
-                                    >
-                                        <span className="font-medium text-black dark: text-white">{q.question} </span>
-                                        <span className=" ml-6 flex-shrink-0">
-                                            {activeQuestion === q._id ? (
-                                                <HiMinus className="h-6 w-6 text-black dark: text-white" />
-                                            ) : (
-                                                <HiPlus className="h-6 w-6 text-black dark: text-white" />
-                                            )
-
-                                            }
-                                        </span>
-                                    </button>
-                                </dt>
-                                {activeQuestion === q._id && (
-                                    <dd className="mt-2 pr-12">
-                                        <p className=" text-base font-Poppins text-black dark: text-white ">{q.answer} </p>
-                                    </dd>
-                                )}
-
-                            </div>
-                        )
-                        )}
-
-                    </dl>
-
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+            <div className="max-w-4xl mx-auto px-4">
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white relative inline-block">
+                        Câu hỏi thường gặp
+                        <span className="absolute w-full h-1 bottom-[-15] left-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></span>
+                    </h1>
                 </div>
+                {/* FAQ List */}
+                <div className="space-y-4">
+                    {questions.map((q, index) => (
+                        <div
+                            key={q._id}
+                            className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden 
+                         shadow-sm hover:shadow-md transition-all duration-200
+                         ${activeQuestion === q._id ? 'ring-2 ring-purple-500' : ''}`}
+                        >
+                            <button
+                                onClick={() => toggleQuestion(q._id)}
+                                className="w-full px-6 py-4 text-left flex items-center justify-between"
+                            >
+                                <span className="flex items-center">
+                                    <span className="w-8 h-8 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-sm mr-4">
+                                        {index + 1}
+                                    </span>
+                                    <h3 className="font-medium text-gray-900 dark:text-white">
+                                        {q.question}
+                                    </h3>
+                                </span>
+                                {activeQuestion === q._id ? (
+                                    <ChevronUp className="w-5 h-5 text-purple-500" />
+                                ) : (
+                                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                                )}
+                            </button>
 
+                            {activeQuestion === q._id && (
+                                <div className="px-6 pb-4">
+                                    <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
+                                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                            {q.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
-            <br />
-            <br />
-            <br />
         </div>
-    )
-}
+    );
+};
 
-export default FAQ
+export default FAQ;
