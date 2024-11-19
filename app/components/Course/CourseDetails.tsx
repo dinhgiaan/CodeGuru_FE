@@ -33,12 +33,8 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
   const isPurchased = user && user?.courses?.find((item: any) => item.courseId === data._id);
-<<<<<<< HEAD
   console.log("check item._id:", data.courseId)
   console.log("check data._id:", data._id)
-=======
-  console.log("check 1: ", data._id);
->>>>>>> 44e45bb3a1e6ebf80dcb0fa29cf5be36e094e3ae
   const handleOrder = (e: any) => {
     setOpen(true);
   };
