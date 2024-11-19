@@ -9,6 +9,8 @@ import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../Payment/CheckoutForm";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
+import Image from 'next/image';
+import { VscVerifiedFilled } from "react-icons/vsc";
 
 type Props = {
   data: any;
@@ -31,8 +33,12 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
   const isPurchased = user && user?.courses?.find((item: any) => item.courseId === data._id);
+<<<<<<< HEAD
   console.log("check item._id:", data.courseId)
   console.log("check data._id:", data._id)
+=======
+  console.log("check 1: ", data._id);
+>>>>>>> 44e45bb3a1e6ebf80dcb0fa29cf5be36e094e3ae
   const handleOrder = (e: any) => {
     setOpen(true);
   };
@@ -135,13 +141,15 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                   <div className="w-full pb-4" key={index}>
                     <div className="flex">
                       <div className="w-12 h-12">
-                        <div className="w-12 h-12 bg-slate-600 rounded-full flex items-center justify-center cursor-pointer">
-                          <h1 className="uppercase text-[18px] text-black dark:text-white">
-                            {item.user?.name?.slice(0, 2) || "NA"}
-                          </h1>
-                        </div>
-                      </div>
+                        <Image
+                          src={item.user.avatar ? item.user.avatar.url : "https://res.cloudinary.com/duw4cwp7d/image/upload/v1731131446/avatars/v7mr3zt3yoj0n0f9bobj.png"}
+                          width={50}
+                          height={50}
+                          alt=""
+                          className="w-[50px] h-[50px] rounded-full object-cover"
+                        />
 
+                      </div>
                       <div className="hidden lg:block pl-2">
                         <div className="flex items-center">
                           <h5 className="text-[18px] pr-2 text-black dark:text-white">
@@ -167,6 +175,37 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                         <Rating rating={item.rating} />
                       </div>
                     </div>
+                    {
+                      item.commentReplies.map((i: any, index: number) => (
+                        <div key={index} className="w-full flex 800px:ml-16 my-5 dark:text-white text-black">
+                          <div className="w-[50px] h-[50px] ">
+                            <Image
+                              src={i.user.avatar ? i.user.avatar.url : "https://res.cloudinary.com/duw4cwp7d/image/upload/v1731131446/avatars/v7mr3zt3yoj0n0f9bobj.png"}
+                              width={50}
+                              height={50}
+                              alt=""
+                              className="w-[50px] h-[50px] rounded-full object-cover"
+                            />
+                          </div>
+                          <div className="pl-2">
+                            <div className="flex items-center">
+                              <h5 className="text-[20px]">{i.user.name}</h5>{" "}
+                              <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
+                            </div>
+                            <p>{i.comment}</p>
+                            <small className="text-[#ffffff83]">
+                              {format(i.createdAt)}
+                            </small>
+                          </div>
+                        </div>
+                      ))
+                    }
+
+
+
+
+
+
                   </div>
                 )
               )}
