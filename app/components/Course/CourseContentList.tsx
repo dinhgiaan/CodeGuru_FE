@@ -60,7 +60,7 @@ const CourseContentList: FC<Props> = (props) => {
               {/*Render video section*/}
 
               <div className="w-full flex justify-between items-center">
-                <h2 className="text-[22px] text-black dark:text-white">
+                <h2 className="text-[22px] text-black dark:text-[#6ed2d8] font-semibold">
                   {section}
                 </h2>
                 <button

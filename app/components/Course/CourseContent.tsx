@@ -30,7 +30,7 @@ const CourseContent = ({ id, user }: Props) => {
                             <Header activeItem={1} open={open} setOpen={setOpen} route={route} setRoute={setRoute} />
                             <div className='w-full grid 800px:grid-cols-10'>
                                 <Heading
-                                    title='{data[activeVideo]?.title}'
+                                    title={data[activeVideo].videoSection}
                                     description='Dinhgiaandev'
                                     keywords='{data[activeVideo]?.tags}'
                                 />
