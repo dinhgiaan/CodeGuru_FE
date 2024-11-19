@@ -3,7 +3,7 @@ import CoursePlayer from '@/app/utils/CoursePlayer';
 import { useAddAnswerInQuestionMutation, useAddNewQuestionMutation, useAddReplyInReviewMutation, useAddReviewInCourseMutation, useGetCoursesDetailsQuery } from '@/redux/features/course/courseAPI';
 import Image from 'next/image';
 import { format } from 'timeago.js';
-
+import { IoChevronBackCircleSharp } from "react-icons/io5";
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { AiFillStar, AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineStar } from 'react-icons/ai';
@@ -119,31 +119,37 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
 
     return (
         <div className='w-[95%] 800px:w-[86%] py-4 m-auto'>
+            <div className='dark:text-white text-black left-3 top-3 absolute cursor-pointer' onClick={() => window.history.back()}>
+                <IoChevronBackCircleSharp size={40} />
+            </div>
             <CoursePlayer
                 title={data[activeVideo]?.title}
                 videoUrl={data[activeVideo]?.videoUrl}
             />
-            <div className='w-full flex items-center justify-between my-3'>
-                <div className={`${style.button} !w-[unset] !min-h-[40px] !py-[unset] ${activeVideo === 0 && "!cursor-no-drop opacity-[.8]"}`}
+            <div className="w-full flex items-center justify-between my-3">
+                <div
+                    className={`${style.button} !min-h-[40px] !py-[unset] mx-2 ${activeVideo === 0 ? "flex-[1] opacity-[.8] !cursor-no-drop" : "flex-[2]"}`}
                     onClick={() => setActiveVideo(activeVideo === 0 ? 0 : activeVideo - 1)}
                 >
-                    <AiOutlineArrowLeft className='mr-2' />
+                    <AiOutlineArrowLeft className="mr-2" />
                     Bài học trước
                 </div>
-                <div className={`${style.button} w-[unset] w-[80px] !min-h-[40px] !py-[unset] ${data.length - 1 === activeVideo && "!cursor-no-drop opacity-[.8]"}`}
+
+                <div
+                    className={`${style.button} !min-h-[40px] !py-[unset] mx-2 ${data.length - 1 === activeVideo ? "flex-[1] opacity-[.8] !cursor-no-drop" : "flex-[2]"}`}
                     onClick={() => setActiveVideo(data && data.length - 1 === activeVideo ? activeVideo : activeVideo + 1)}
                 >
                     Bài học tiếp theo
-                    <AiOutlineArrowRight className='ml-2' />
+                    <AiOutlineArrowRight className="ml-2" />
                 </div>
             </div>
-            <h1 className='pt-2 text-[25px] font-[600] dark:text-white text-black'>{data[activeVideo].title}</h1>
+            <h1 className='pt-2 text-[25px] font-[600] dark:text-white text-black'><span className='text-[#53efec]'>Tên khóa học: </span>{data[activeVideo].title}</h1>
             <br />
             <div className='w-full p-4 flex items-center justify-between bg-slate-500 bg-opacity-20 backdrop-blur shadow-[bg-slate-700] rounded shadow-inner'>
-                {["Tổng quan", "Tài nguyên", "Q & A", "Đánh giá"].map((item, index) => (
+                {["Mô tả", "Tài liệu", "Q&A", "Đánh giá"].map((item, index) => (
                     <h5
                         key={index}
-                        className={`800px:text-[20px] cursor-pointer ${activeBar === index ? "text-red-400" : "dark:text-white  text-black"}`}
+                        className={`800px:text-[20px] cursor-pointer ${activeBar === index ? "text-[#d9d966]" : "dark:text-white  text-black"}`}
                         onClick={() => setActiveBar(index)}
                     >
                         {item}
@@ -355,8 +361,8 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
                                                         </div>
                                                         <div className="pl-2">
                                                             <div className="flex items-center">
-                                                            <h5 className="text-[20px]">{i.user.name}</h5>{" "}
-                                                            <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]"/>
+                                                                <h5 className="text-[20px]">{i.user.name}</h5>{" "}
+                                                                <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
                                                             </div>
                                                             <p>{i.comment}</p>
                                                             <small className="text-[#ffffff83]">

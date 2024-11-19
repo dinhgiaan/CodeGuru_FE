@@ -24,7 +24,7 @@ const DashboardHeader: FC<Props> = () => {
         </span>
       </div>
       {open && (
-        <div className="w-[380px] h-[50vh] dark:bg-[#1e293b] bg-white shadow-2xl absolute top-16 right-0 z-10 rounded-md overflow-hidden transition-all duration-300">
+        <div className="w-[380px] h-[50vh] dark:bg-[#1e293b] bg-white shadow-2xl absolute top-16 right-0 z-10 rounded-md overflow-hidden transition-all duration-300 font-Roboto">
           <h5 className="text-center text-[20px] font-semibold text-black dark:text-white p-3 border-b dark:border-b-[#ffffff47] border-b-[#0000000f]">
             Thông báo
           </h5>

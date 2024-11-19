@@ -58,15 +58,16 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
   }, [updateError, isSuccess, deleteSuccess, deleteError]);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
+    { field: "id", headerName: "ID", flex: 0.3 },
     { field: "name", headerName: "Họ và tên", flex: 0.4 },
-    { field: "email", headerName: "Email", flex: 0.5 },
+    { field: "email", headerName: "Email", flex: 0.4 },
     { field: "role", headerName: "Vai trò", flex: 0.2 },
+    { field: "courses", headerName: "Khóa học đã học", flex: 0.3 },
     { field: "created_at", headerName: "Ngày tham gia", flex: 0.3 },
     {
       field: " ",
       headerName: "Xóa",
-      flex: 0.2,
+      flex: 0.1,
       renderCell: (params: any) => {
         return (
           <Button
@@ -75,21 +76,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
               setUserId(params.row.id);
             }}
           >
-            <AiOutlineDelete className="dark:text-white text-black" size={20} />
-          </Button>
-        );
-      },
-    },
-    {
-      field: "  ",
-      headerName: "Email",
-      flex: 0.2,
-      renderCell: (params: any) => {
-        return (
-          <Button>
-            <a href={`mailto:${params.row.email}`}>
-              <AiOutlineMail className="dark:text-white text-black" size={20} />
-            </a>
+            <AiOutlineDelete className="dark:text-white text-black mr-8" size={20} />
           </Button>
         );
       },
@@ -119,6 +106,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
           name: item.name,
           email: item.email,
           role: item.role,
+          courses: item.courses.length,
           created_at: format(item.createdAt, "vi"),
         });
       });
@@ -284,13 +272,13 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
                 </h1>
                 <div className="flex w-full items-center justify-between mb-6 mt-4">
                   <div
-                    className={`${style.button} w-[60px] h-[30px] bg-[#57c7a3] flex justify-center items-center cursor-pointer rounded`}
+                    className={`${style.button} !w-[120px] h-[30px] bg-[#57c7a3] flex justify-center items-center cursor-pointer rounded`}
                     onClick={() => setOpen(false)}
                   >
                     Hủy bỏ
                   </div>
                   <div
-                    className={`${style.button} w-[120px] h-[30px] bg-[#d63f3f] flex justify-center items-center cursor-pointer rounded ml-5`}
+                    className={`${style.button} !w-[120px] h-[30px] bg-[#d63f3f] flex justify-center items-center cursor-pointer rounded ml-5`}
                     onClick={handleDelete}
                   >
                     Xóa

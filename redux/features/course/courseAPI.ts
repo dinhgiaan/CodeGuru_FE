@@ -34,6 +34,13 @@ export const courseAPI = apiSlice.injectEndpoints({
                 credentials: 'include' as const,
             }),
         }),
+        deleteCourse: builder.mutation({
+            query: (id) => ({
+                url: `delete-course/${id}`,
+                method: "DELETE",
+                credentials: 'include' as const,
+            }),
+        }),
         getCoursesContent: builder.query({
             query: (id) => ({
                 url: `get-course-content/${id}`,
@@ -73,10 +80,10 @@ export const courseAPI = apiSlice.injectEndpoints({
             })
         }),
         addReplyInReview: builder.mutation({
-            query: ({ comment,courseId,reviewId }: any) => ({
+            query: ({ comment, courseId, reviewId }: any) => ({
                 url: `add-reply`,
                 body: {
-                    comment,courseId,reviewId
+                    comment, courseId, reviewId
                 },
                 method: "PUT",
                 credentials: 'include' as const,
@@ -90,6 +97,7 @@ export const
     {
         useCreateCourseMutation,
         useGetAllCoursesQuery,
+        useDeleteCourseMutation,
         useGetUsersAllCoursesQuery,
         useGetCoursesDetailsQuery,
         useGetCoursesContentQuery,
