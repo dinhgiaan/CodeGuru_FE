@@ -1,7 +1,7 @@
 import React from 'react';
-import { Users, Brain, Code, GraduationCap } from 'lucide-react';
+import { Users, Rocket, Brain, Code, GraduationCap } from 'lucide-react';
 
-const About = () => {
+const Course = () => {
     const features = [
         {
             icon: <Code className="w-8 h-8 text-pink-500" />,
@@ -106,4 +106,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Course;

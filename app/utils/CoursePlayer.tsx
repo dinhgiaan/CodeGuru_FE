@@ -27,11 +27,11 @@ const CoursePlayer: FC<Props> = ({ videoUrl }) => {
                         src={`https://player.vdocipher.com/v2/?otp=${videoData?.otp}&playbackInfo=${videoData.playbackInfo}&player=bwVvK9ABLhYBAP92`}
                         style={{
                             border: 0,
-                            width: "90%",
+                            width: "100%",
                             height: "100%",
                             position: "absolute",
                             top: 0,
-                            left: 55,
+                            left: 0,
                         }}
                         allowFullScreen={true}
                         allow='encrypted-media'
