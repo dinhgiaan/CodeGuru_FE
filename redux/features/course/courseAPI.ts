@@ -1,4 +1,6 @@
+import { course } from '@/app/styles/course';
 import { apiSlice } from '../api/apiSlice'
+import { comment } from 'postcss';
 
 
 export const courseAPI = apiSlice.injectEndpoints({
@@ -38,6 +40,48 @@ export const courseAPI = apiSlice.injectEndpoints({
                 method: "GET",
                 credentials: "include" as const
             })
+        }),
+        addNewQuestion: builder.mutation({
+            query: ({ question, courseId, contentId }) => ({
+                url: 'add-question',
+                body: {
+                    question, courseId, contentId
+                },
+                method: "PUT",
+                credentials: "include" as const,
+            })
+        }),
+        addAnswerInQuestion: builder.mutation({
+            query: ({ answer, courseId, contentId, questionId }) => ({
+                url: "add-answer",
+                body: {
+                    answer, courseId, contentId, questionId
+                },
+                method: "PUT",
+                credentials: "include" as const
+            })
+        }),
+        addReviewInCourse: builder.mutation({
+            query: ({ review, rating, courseId }: any) => ({
+                url: `add-review/${courseId}`,
+                body: {
+                    review,
+                    rating
+                },
+                method: "PUT",
+                credentials: 'include' as const,
+            })
+        }),
+        addReplyInReview: builder.mutation({
+            query: ({ comment,courseId,reviewId }: any) => ({
+                url: `add-reply`,
+                body: {
+                    comment,courseId,reviewId
+                },
+                method: "PUT",
+                credentials: 'include' as const,
+            })
+
         })
     }),
 });
@@ -48,5 +92,9 @@ export const
         useGetAllCoursesQuery,
         useGetUsersAllCoursesQuery,
         useGetCoursesDetailsQuery,
-        useGetCoursesContentQuery
+        useGetCoursesContentQuery,
+        useAddNewQuestionMutation,
+        useAddAnswerInQuestionMutation,
+        useAddReviewInCourseMutation,
+        useAddReplyInReviewMutation,
     } = courseAPI;
