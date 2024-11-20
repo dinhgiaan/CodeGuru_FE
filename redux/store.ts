@@ -15,7 +15,8 @@ export const store = configureStore({
 
 //gọi lại refresh token mỗi khi reload lại page
 const initializeApp = async () => {
-    await store.dispatch(apiSlice.endpoints.refreshToken.initiate({}, { forceRefetch: true }));
-    await store.dispatch(apiSlice.endpoints.loadUser.initiate({}, { forceRefetch: true }));
+    await store.dispatch(
+        apiSlice.endpoints.loadUser.initiate({}, { forceRefetch: true })
+    );
 };
 initializeApp();

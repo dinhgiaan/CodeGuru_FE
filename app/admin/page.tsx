@@ -16,7 +16,7 @@ const page = (Props: Props) => {
           description='CodeGuru là trang web cung cấp các khóa học đa dạng'
           keywords='Programming, MERN, Redux, LMS'
         />
-        <div className="flex h-[200vh]">
+        <div className="flex h-[100vh]">
           <div className="1500px:w-[15%] w-1/5">
             <AdminSidebar />
           </div>

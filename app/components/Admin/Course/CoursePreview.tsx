@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
-import { IoCheckmarkDoneCircleOutline } from 'react-icons/io5'
+import { HiCheckCircle } from "react-icons/hi";
+import { HiArrowSmRight } from "react-icons/hi";
 
 import { style } from "../../../../app/styles/style"
 import Rating from "../../../../app/utils/Rating"
@@ -11,13 +12,15 @@ type Props = {
     setActive: (active: number) => void;
     courseData: any,
     handleCourseCreate: any,
+    isEdit: boolean
 }
 
 const CoursePreview: FC<Props> = ({
     courseData,
     handleCourseCreate,
     setActive,
-    active
+    active,
+    isEdit
 }) => {
     const formatVNDPrice = (price: number) => {
         return new Intl.NumberFormat('vi-VN', {
@@ -101,7 +104,7 @@ const CoursePreview: FC<Props> = ({
                     <ul className="list-disc ml-6 dark:text-white text-black">
                         {courseData?.benefits?.map((item: any, index: number) => (
                             <li key={index} className="py-2 flex items-center">
-                                <IoCheckmarkDoneCircleOutline size={20} className="mr-2" />
+                                <HiCheckCircle size={25} className="mr-2 text-[#56e956]" />
                                 <span>{item.title}</span>
                             </li>
                         ))}
@@ -115,7 +118,7 @@ const CoursePreview: FC<Props> = ({
                     <ul className="list-disc ml-6 dark:text-white text-black">
                         {courseData?.requirements?.map((item: any, index: number) => (
                             <li key={index} className="py-2 flex items-center">
-                                <IoCheckmarkDoneCircleOutline size={20} className="mr-2" />
+                                <HiArrowSmRight size={25} className="mr-2" />
                                 <span>{item.title}</span>
                             </li>
                         ))}
@@ -138,7 +141,9 @@ const CoursePreview: FC<Props> = ({
                         Quay lại
                     </div>
                     <div className='w-full 800px:w-[180px] flex items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff] round mt-8 cursor-pointer' onClick={() => createCourse()}>
-                        Tạo khóa học
+                        {
+                            isEdit ? "Cập nhật" : "Tạo"
+                        }
                     </div>
                 </div>
             </div>

@@ -64,6 +64,7 @@ const CourseContent: FC<Props> = ({
                 videoUrl: "",
                 title: "",
                 description: "",
+                videoLength: "",
                 videoSection: newVideoSection,
                 links: [{ title: "", url: "" }],
             };
@@ -79,6 +80,7 @@ const CourseContent: FC<Props> = ({
             lastSection.title === "" ||
             lastSection.description === "" ||
             lastSection.videoUrl === "" ||
+            lastSection.videoLength === "" ||
             lastSection.links[0].title === "" ||
             lastSection.links[0].url === ""
         ) {
@@ -89,6 +91,7 @@ const CourseContent: FC<Props> = ({
                 videoUrl: "",
                 title: "",
                 description: "",
+                videoLength: "",
                 videoSection: `Phần chưa đặt tên ${activeSection + 1}`,
                 links: [{ title: "", url: "" }],
             };
@@ -105,6 +108,7 @@ const CourseContent: FC<Props> = ({
             courseContentData[courseContentData.length - 1].title === "" ||
             courseContentData[courseContentData.length - 1].description === "" ||
             courseContentData[courseContentData.length - 1].videoUrl === "" ||
+            courseContentData[courseContentData.length - 1].videoLength === "" ||
             courseContentData[courseContentData.length - 1].links[0].title === "" ||
             courseContentData[courseContentData.length - 1].links[0].url === ""
         ) {
@@ -114,6 +118,7 @@ const CourseContent: FC<Props> = ({
             handleCourseSubmit();
         }
     };
+    console.log("courseContentData: ", courseContentData);
 
     return (
         <div className='w-[80%] m-auto mt-24 p-3'>

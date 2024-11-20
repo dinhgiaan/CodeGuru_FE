@@ -4,11 +4,12 @@ import { Box, Button, Modal } from "@mui/material";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useTheme } from "next-themes";
 import Loader from '../../Loader/Loader';
-import { useDeleteCourseMutation, useGetAllCoursesQuery } from '@/redux/features/course/courseAPI';
+import { useDeleteCourseMutation, useGetAllCoursesQuery, useGetUsersAllCoursesQuery } from '@/redux/features/course/courseAPI';
 import { format, register } from 'timeago.js';
 import { FiEdit2 } from 'react-icons/fi';
 import { style } from '@/app/styles/style';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 type Props = {}
 
@@ -32,9 +33,9 @@ const AllCourses = (props: Props) => {
             renderCell: (params: any) => {
                 return (
                     <>
-                        <Button>
-                            <FiEdit2 className="dark:text-white text-black" size={20} />
-                        </Button>
+                        <Link href={`/admin/edit-course/${params.row.id}`}>
+                            <FiEdit2 className="dark:text-white text-black mt-4" size={20} />
+                        </Link>
                     </>
                 );
             },
@@ -65,7 +66,7 @@ const AllCourses = (props: Props) => {
         footerPaginationRowsPerPage: "Khóa học mỗi trang:",
         footerPaginationButton: "Đi",
     };
-    register('vi-VI', (number, index, totalSec) => {
+    register('vi-VI', (_number, index) => {
         const timeString = [
             ['vừa xong', 'một lúc'],
             ['%s giây trước', 'trong %s giây'],
@@ -86,8 +87,8 @@ const AllCourses = (props: Props) => {
     });
 
     const rows: any = [];
-    if (data && data.course) {
-        data.course.forEach((item: any) => {
+    if (data && data.courses) {
+        data.courses.forEach((item: any) => {
             rows.push({
                 id: item._id,
                 name: item.name,

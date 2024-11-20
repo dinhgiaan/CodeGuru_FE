@@ -14,6 +14,8 @@ import WysiwygIcon from "@mui/icons-material/Wysiwyg";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PortraitIcon from '@mui/icons-material/Portrait';
+import { TbPresentationAnalytics } from "react-icons/tb";
+import { TbFileAnalytics } from "react-icons/tb";
 
 export {
   HomeOutlinedIcon,
@@ -31,5 +33,7 @@ export {
   WysiwygIcon,
   ManageHistoryIcon,
   ExitToAppIcon,
-  PortraitIcon
+  PortraitIcon,
+  TbPresentationAnalytics,
+  TbFileAnalytics
 };
