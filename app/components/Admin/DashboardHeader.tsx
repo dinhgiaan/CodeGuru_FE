@@ -4,10 +4,13 @@ import React, { FC, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
 
-type Props = {};
+type Props = {
+  open?:boolean;
+  setOpen?: any;
+};
 
-const DashboardHeader: FC<Props> = () => {
-  const [open, setOpen] = useState(false);
+const DashboardHeader: FC<Props> = ({open,setOpen}) => {
+  // const [open, setOpen] = useState(false);
 
   const toggleNotifications = () => setOpen(!open);
 
