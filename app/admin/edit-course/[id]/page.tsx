@@ -12,7 +12,7 @@ const page = ({ params }: any) => {
     return (
         <div>
             <Heading
-                title="CodeGuru - Tạo khóa học"
+                title="CodeGuru - Cập nhật khóa học"
                 description="CodeGuru đây là nền tảng dành cho học sinh tham gia các khóa học, bên cạnh việc học còn được các thầy cô hỗ trợ"
                 keywords="Programming, MERN, Redux, Machine Learning"
             />

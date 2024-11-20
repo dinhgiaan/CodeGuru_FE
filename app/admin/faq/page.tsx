@@ -4,7 +4,6 @@ import AdminSidebar from "../../components/Admin/sidebar/AdminSidebar"
 import EditFaq from "../../components/Admin/Customization/EditFaq";
 import AdminProtected from "@/app/hooks/adminProtected";
 import DashboardHero from "@/app/components/Admin/DashboardHero";
-import FAQ from "@/app/components/FAQ/FAQ";
 
 type Props = {};
 
@@ -13,7 +12,7 @@ const page = (props: Props) => {
         <div>
             <AdminProtected>
                 <Heading
-                    title="CodeGuru - Tạo khóa học"
+                    title="CodeGuru - FAQ"
                     description="CodeGuru đây là nền tảng dành cho học sinh tham gia các khóa học, bên cạnh việc học còn được các thầy cô hỗ trợ"
                     keywords="Programming, MERN, Redux, Machine Learning"
                 />
@@ -22,7 +21,7 @@ const page = (props: Props) => {
                         <AdminSidebar />
                     </div>
                     <div className="w-[85%] ">
-                        <DashboardHero/>
+                        <DashboardHero />
                         <EditFaq />
                     </div>
                 </div>
