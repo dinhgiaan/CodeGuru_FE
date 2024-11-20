@@ -9,7 +9,17 @@ export const layoutApi = apiSlice.injectEndpoints({
                 method:"GET",
                 credentials:"include" as const,
             })
+        }),
+        editLayout: builder.mutation({
+            query: ({ type,image,title,subTitle,faq,categories})=>({
+                url:`edit-layout`,
+                body:{
+                    type,image,title,subTitle,faq,categories
+                },
+                method:"PUT",
+                credentials: "include" as const
+            })
         })
     })
 })
-export const {useGetHeroDataQuery} = layoutApi;
+export const {useGetHeroDataQuery,useEditLayoutMutation} = layoutApi;
