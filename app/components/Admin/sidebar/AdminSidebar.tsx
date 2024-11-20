@@ -236,15 +236,17 @@ const Sidebar = () => {
               setSelected={setSelected}
               className={`${course.font}`}
             />
+            
 
             <Item
               title="FAQ"
-              to="/faq"
+              to="/admin/faq"
               icon={<QuizIcon />}
               selected={selected}
               setSelected={setSelected}
               className={`${course.font}`}
             />
+            
             <Item
               title="Các danh mục"
               to="/admin/categories"
