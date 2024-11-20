@@ -9,9 +9,7 @@ const FAQ = () => {
 
     useEffect(() => {
         if (data) {
-            // Cập nhật danh sách câu hỏi và reset trạng thái
             setQuestions(data.layout.faq);
-            setActiveQuestion(null); // Reset câu hỏi đang mở khi có dữ liệu mới
         }
     }, [data]);
 

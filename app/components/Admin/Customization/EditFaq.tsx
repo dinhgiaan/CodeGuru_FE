@@ -18,18 +18,19 @@ const EditFaq = (props: Props) => {
     const [questions, setQuestions] = useState<any[]>([]);
 
     useEffect(() => {
+        if (data) {
+            setQuestions(data.layout.faq);
+        }
         if (layoutSuccess) {
-            toast.success("FAQ cập nhật thành công");
-            refetch(); // Lấy dữ liệu mới nhất từ server
+            toast.success("FAQ cập nhật thành công")
         }
-    }, [layoutSuccess, refetch]);
-    
-    useEffect(() => {
-        if (error && "data" in error) {
-            const errorData = error as any;
-            toast.error(errorData?.data?.message);
+        if (error) {
+            if ("data" in error) {
+                const errorData = error as any;
+                toast.error(errorData?.data?.message)
+            }
         }
-    }, [error]);
+    }, [data, layoutSuccess, error]);
 
     const toggleQuestion = (id: any) => {
         setQuestions((prevQuestions) =>
