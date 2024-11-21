@@ -8,9 +8,6 @@ import {
   AiOutlineArrowRight,
   AiOutlineStar,
 } from "react-icons/ai";
-import socketIO from "socket.io-client";
-const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_UR || "";
-const socketid = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 type Props = {
   data: any;

@@ -110,7 +110,7 @@ const CreateCourse = (props: Props) => {
     await handleSubmit(); // Xử lý dữ liệu trước
 
     if (!isLoading) {
-      await createCourse(courseData); // Gửi dữ liệu đã được xử lý
+      await createCourse(data);
     }
   };
 
@@ -153,6 +153,7 @@ const CreateCourse = (props: Props) => {
             setActive={setActive}
             courseData={courseData}
             handleCourseCreate={handleCourseCreate}
+            isEdit={true}
           />
         )}
       </div>

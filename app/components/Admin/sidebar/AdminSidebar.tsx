@@ -9,17 +9,16 @@ import {
   ArrowBackIosIcon,
   PeopleOutlinedIcon,
   ReceiptOutlinedIcon,
-  BarChartOutlinedIcon,
-  MapOutlinedIcon,
   GroupsIcon,
   OndemandVideoIcon,
   VideoCallIcon,
-  WebIcon,
   QuizIcon,
   WysiwygIcon,
   ManageHistoryIcon,
   PortraitIcon,
   ExitToAppIcon,
+  TbPresentationAnalytics,
+  TbFileAnalytics
 } from "./Icon";
 import avatarDefault from "../../../../public/assets/avatar.png";
 import { useSelector } from "react-redux";
@@ -166,7 +165,7 @@ const Sidebar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
-              title="Bảng điều khiển"
+              title="Tổng quan"
               to="/admin"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -181,7 +180,7 @@ const Sidebar = () => {
               {!isCollapsed && "DỮ LIỆU"}
             </Typography>
             <Item
-              title="Người dùng"
+              title="Học viên"
               to="/admin/users"
               icon={<GroupsIcon />}
               selected={selected}
@@ -229,22 +228,14 @@ const Sidebar = () => {
               {!isCollapsed && "TÙY CHỈNH"}
             </Typography>
             <Item
-              title="Hero"
-              to="/admin/hero"
-              icon={<WebIcon />}
-              selected={selected}
-              setSelected={setSelected}
-              className={`${course.font}`}
-            />
-
-            <Item
               title="FAQ"
-              to="/faq"
+              to="/admin/faq"
               icon={<QuizIcon />}
               selected={selected}
               setSelected={setSelected}
               className={`${course.font}`}
             />
+
             <Item
               title="Các danh mục"
               to="/admin/categories"
@@ -280,7 +271,7 @@ const Sidebar = () => {
             <Item
               title="Phân tích khóa học"
               to="/admin/courses-analytics"
-              icon={<BarChartOutlinedIcon />}
+              icon={<TbPresentationAnalytics size={25} />}
               selected={selected}
               setSelected={setSelected}
               className={`${course.font}`}
@@ -288,7 +279,7 @@ const Sidebar = () => {
             <Item
               title="Phân tích hóa đơn"
               to="/admin/orders-analytics"
-              icon={<MapOutlinedIcon />}
+              icon={<TbFileAnalytics size={25} />}
               selected={selected}
               setSelected={setSelected}
               className={`${course.font}`}

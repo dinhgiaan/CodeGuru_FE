@@ -13,9 +13,9 @@ const page = (Props: Props) => {
     <div>
       <AdminProtected>
         <Heading
-          title='CodeGuru - Quản lý học viên'
-          description='CodeGuru là trang web cung cấp các khóa học đa dạng'
-          keywords='Programming, MERN, Redux, LMS'
+          title="CodeGuru - Quản lý học viên"
+          description="CodeGuru là trang web cung cấp các khóa học đa dạng"
+          keywords="Programming, MERN, Redux, LMS"
         />
         <div className="flex h-[100vh]">
           <div className="1500px:w-[15%] w-1/5">
@@ -23,7 +23,7 @@ const page = (Props: Props) => {
           </div>
           <div className="w-[85%] h-full overflow-auto">
             <DashboardHero />
-            <AllUsers />
+            <AllUsers isTeam={false} />
           </div>
         </div>
       </AdminProtected>

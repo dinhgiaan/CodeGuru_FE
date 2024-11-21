@@ -11,7 +11,6 @@ type Props = {
   setActive: (active: number) => void;
   courseData: any;
   handleCourseCreate: any;
-  isEdit?: boolean;
 };
 
 const CoursePreview: FC<Props> = ({
@@ -19,7 +18,6 @@ const CoursePreview: FC<Props> = ({
   handleCourseCreate,
   setActive,
   active,
-  isEdit,
 }) => {
   const formatVNDPrice = (price: number) => {
     return new Intl.NumberFormat("vi-VN", {
