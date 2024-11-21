@@ -190,7 +190,7 @@ const Sidebar = () => {
 
             <Item
               title="Hóa đơn"
-              to="/admin/invoices"
+              to="/admin/orders"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

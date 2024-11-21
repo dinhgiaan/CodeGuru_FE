@@ -1,7 +1,7 @@
-import React, { FC, use, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Button, Modal } from "@mui/material";
-import { AiOutlineDelete, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import { useTheme } from "next-themes";
 import { style } from "../../../../app/styles/style"
 import {
