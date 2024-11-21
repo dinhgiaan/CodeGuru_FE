@@ -18,19 +18,21 @@ type Props = {
 
 const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
   const formatVNDPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
     }).format(price);
   };
   const { data: userData } = useLoadUserQuery(undefined, {});
-  const user = userData?.user;
+  const [user, setUser] = useState<any>();
   const [open, setOpen] = useState(false);
-  const discountPercentage = ((data?.suggestedPrice - data.price) / data.suggestedPrice) * 100;
+  const discountPercentage =
+    ((data?.suggestedPrice - data.price) / data.suggestedPrice) * 100;
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased = user && user?.courses?.find((item: any) => data.courseId === data.courseId);
+  const isPurchased =
+    user && user?.courses?.find((item: any) => data.courseId === data.courseId);
   const handleOrder = (e: any) => {
     setOpen(true);
   };
@@ -230,14 +232,16 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
               </div>
               <div className="w-96 pb-8">
                 {stripePromise && clientSecret && (
-                  <Elements stripe={stripePromise} options={{ clientSecret, locale: 'vi' }}>
-                    <CheckoutForm setOpen={setOpen} data={data} />
+                  <Elements
+                    stripe={stripePromise}
+                    options={{ clientSecret, locale: "vi" }}
+                  >
+                    <CheckoutForm setOpen={setOpen} data={data} user={user} />
                   </Elements>
                 )}
               </div>
             </div>
           </div>
-
         )}
       </>
     </div>

@@ -1,22 +1,31 @@
-import { useLoadUserQuery } from '@/redux/features/api/apiSlice';
-import { useCreateOrderMutation } from '@/redux/features/order/orderAPI';
-import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { redirect } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
+import { useCreateOrderMutation } from "@/redux/features/order/orderAPI";
+import {
+  LinkAuthenticationElement,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import socketIO, { io } from "socket.io-client";
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "";
+const socket = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 type Props = {
-  setOpen: any,
-  data: any
-}
+  setOpen: any;
+  data: any;
+  user: any;
+};
 
-const CheckoutForm = ({ setOpen, data }: Props) => {
+const CheckoutForm = ({ setOpen, data, user }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<any>("");
   const [createOrder, { data: orderData, error }] = useCreateOrderMutation();
   const [loadUser, setLoadUser] = useState(false);
-  const { } = useLoadUserQuery({ skip: loadUser ? false : true });
+  const {} = useLoadUserQuery({ skip: loadUser ? false : true });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
@@ -28,7 +37,7 @@ const CheckoutForm = ({ setOpen, data }: Props) => {
     setIsLoading(true);
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
-      redirect: "if_required"
+      redirect: "if_required",
     });
     if (error) {
       setMessage(error.message);
@@ -36,40 +45,54 @@ const CheckoutForm = ({ setOpen, data }: Props) => {
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       setIsLoading(false);
       createOrder({ courseId: data._id, payment_info: paymentIntent });
-    };
+    }
   };
 
   useEffect(() => {
-    if (orderData) {
-      setLoadUser(true);
+    if (orderData && socket) {
+      // Gửi thông báo khi đơn hàng mới được tạo
+      socket.emit("notification", {
+        title: "Đơn hàng mới",
+        message: `Bạn có đơn đặt hàng mới từ 123 from ${data.name}`,
+        userId: user?._id,
+      });
       redirect(`/course-access/${data._id}`);
     }
+
     if (error) {
       if ("data" in error) {
         const errorMessage = error as any;
         toast.error(errorMessage.data.message);
       }
     }
-  }, [orderData, error])
+  }, [orderData, error]);
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit} className="w-full flex flex-col items-center">
-      <LinkAuthenticationElement id="link-authentication-element" className="w-full mb-4" />
+    <form
+      id="payment-form"
+      onSubmit={handleSubmit}
+      className="w-full flex flex-col items-center"
+    >
+      <LinkAuthenticationElement
+        id="link-authentication-element"
+        className="w-full mb-4"
+      />
       <PaymentElement id="payment-element" className="w-full mb-4" />
       <button
         disabled={isLoading || !stripe || !elements}
         id="submit"
         className="btn btn-primary w-full mt-10 pb-3"
       >
-        <span id="button-text" className='w-full py-3 px-8 bg-blue-500 rounded-full text-gray-100 hover:bg-blue-700'>
+        <span
+          id="button-text"
+          className="w-full py-3 px-8 bg-blue-500 rounded-full text-gray-100 hover:bg-blue-700"
+        >
           {isLoading ? "Đang thanh toán..." : "Thanh toán ngay"}
         </span>
       </button>
       {message && <div id="payment-message">{message}</div>}
     </form>
+  );
+};
 
-
-  )
-}
-
-export default CheckoutForm
+export default CheckoutForm;
