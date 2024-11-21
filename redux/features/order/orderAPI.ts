@@ -27,8 +27,15 @@ export const orderAPI = apiSlice.injectEndpoints({
                 method: "POST",
                 credentials: "include" as const,
             })
-        })
+        }),
+        getAllOrders: builder.query({
+            query: () => ({
+                url: "get-orders",
+                method: "GET",
+                credentials: "include" as const,
+            }),
+        }),
     })
 });
 
-export const { useGetStripePublishableKeyQuery, useCreatePaymentIntentMutation, useCreateOrderMutation } = orderAPI;
+export const { useGetStripePublishableKeyQuery, useCreatePaymentIntentMutation, useCreateOrderMutation, useGetAllOrdersQuery } = orderAPI;
