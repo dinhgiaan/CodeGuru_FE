@@ -3,7 +3,7 @@ import UserAnalytics from '../Analytics/UserAnalytics';
 import { BiBorderLeft } from 'react-icons/bi';
 import { Box, CircularProgress } from '@mui/material';
 import { PiUsersFourLight } from 'react-icons/pi';
-import OrdersAnalytics from '../Analytics/OrdersAnalytics';
+import AllOrders from '../Order/AllOrders';
 import CourseAnalytics from '../Analytics/CourseAnalytics';
 
 
@@ -85,7 +85,7 @@ const DashboardWidgets: FC<Props> = ({ open, value }) => {
           <h5 className='dark:text-white text-black text-[20px] font-[400] font-Roboto pb-3'>
             Các hóa đơn gần đây
           </h5>
-          <OrdersAnalytics isDashboard={true} />
+          <AllOrders isDashboard={true} />
         </div>
         <div className='pb-6 pr-16'>
           <CourseAnalytics isDashboard={true} />

@@ -144,25 +144,20 @@ const CourseInformation: FC<Props> = ({
           </div>
         </div>
         <br />
-        <div className="w-[50%]">
-          <label
-            className={`${style.label} w-[50%] dark:text-white text-black`}
-          >
-            Course Categories
+        <div className="w-[48%]">
+          <label className={`style.label w-[48%] dark:text-white text-black`}>
+            Danh mục khóa học
           </label>
           <select
             name="categories"
             id="categories"
-            className={`${style.input}`}
+            className={`${style.input} text-black dark:text-white py-3 px-1`}
             value={courseInfo.categories || ""}
-            onChange={
-              (e: any) =>
-                setCourseInfo({ ...courseInfo, categories: e.target.value }) // Cập nhật categories
-            }
+            onChange={(e: any) => setCourseInfo({ ...courseInfo, categories: e.target.value })}
           >
-            <option value=""> Lựa chọn danh mục</option>
+            <option value="" className="text-black">Lựa chọn danh mục</option>
             {categories.map((item) => (
-              <option value={item._id} key={item._id}>
+              <option value={item._id} key={item._id} className="text-black">
                 {item.title}
               </option>
             ))}

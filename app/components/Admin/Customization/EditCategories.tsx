@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../Loader/Loader";
 import { style } from "@/app/styles/style";
 import { AiOutlineDelete } from "react-icons/ai";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { IoAddCircleOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
-import {
-  useEditLayoutMutation,
-  useGetHeroDataQuery,
-} from "@/redux/features/layout/layoutApi";
+import { useEditLayoutMutation, useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
 
 type Category = {
   _id: string;
@@ -17,15 +14,15 @@ type Category = {
 type Props = {};
 
 const EditCategories = (props: Props) => {
-  const { data, isLoading } = useGetHeroDataQuery("Categories", {
+  const { data, isLoading, refetch } = useGetHeroDataQuery("Categories", {
     refetchOnMountOrArgChange: true,
   });
-  const [edit, { isSuccess: layoutSuccess, error }] = useEditLayoutMutation();
+  const [editLayout, { isSuccess: layoutSuccess, error }] = useEditLayoutMutation();
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     if (data?.layout?.categories) {
-      setCategories(data.layout.categories); // Lấy danh mục từ backend
+      setCategories(data.layout.categories);
     }
 
     if (layoutSuccess) {
@@ -40,40 +37,25 @@ const EditCategories = (props: Props) => {
     }
   }, [data, layoutSuccess, error]);
 
-  // Thêm danh mục mới
   const newCategoriesHandler = () => {
-    if (categories[categories.length - 1].title === "") {
-      toast.error("Danh mục không thể bị bỏ trống");
-    } else {
-      setCategories((prevCategory) => [
-        ...prevCategory,
-        { _id: Date.now().toString(), title: "" }, // Tạo danh mục mới, sử dụng ID tạm thời
-      ]);
-    }
+    setCategories((prevCategory) => [
+      ...prevCategory,
+      { _id: Date.now().toString(), title: "" },
+    ]);
   };
 
-  // Cập nhật danh mục
-  const EditCategoriesHandler = async () => {
-    if (
-      !areCategoriesUnchanged(data.layout.categories, categories) &&
-      !isAnyCategoryTitleEmpty(categories)
-    ) {
-      try {
-        // Gọi API cập nhật layout
-        await edit({
-          type: "Categories",
-          categories: categories,
-        }).unwrap();
-        toast.success("Danh mục đã được cập nhật thành công");
-      } catch (error) {
-        toast.error("Không thể cập nhật danh mục");
-      }
-    } else {
-      toast.error("Không có thay đổi hoặc danh mục trống");
-    }
+  const handleCategoryChange = (id: string, value: string) => {
+    setCategories((prevCategory) =>
+      prevCategory.map((cat) =>
+        cat._id === id ? { ...cat, title: value } : cat
+      )
+    );
   };
 
-  // Kiểm tra xem danh mục có thay đổi so với dữ liệu ban đầu hay không
+  const handleCategoryDelete = (id: string) => {
+    setCategories((prevCategory) => prevCategory.filter((cat) => cat._id !== id));
+  };
+
   const areCategoriesUnchanged = (
     originalCategories: Category[],
     newCategories: Category[]
@@ -81,21 +63,28 @@ const EditCategories = (props: Props) => {
     return JSON.stringify(originalCategories) === JSON.stringify(newCategories);
   };
 
-  // Kiểm tra xem có danh mục trống nào không
   const isAnyCategoryTitleEmpty = (categories: Category[]) => {
-    return categories.some((q) => q.title === "");
+    return categories.some((cat) => cat.title === "");
   };
 
-  // Cập nhật tên danh mục
-  const handleCategoriesAdd = (id: string, value: string) => {
-    setCategories((prevCategory) =>
-      prevCategory.map((i) => (i._id === id ? { ...i, title: value } : i))
-    );
-  };
-
-  // Xóa danh mục
-  const handleCategoryDelete = (id: string) => {
-    setCategories((prevCategory) => prevCategory.filter((i) => i._id !== id));
+  const handleEdit = async () => {
+    if (
+      !areCategoriesUnchanged(data.layout.categories, categories) &&
+      !isAnyCategoryTitleEmpty(categories)
+    ) {
+      await editLayout({
+        type: "Categories",
+        categories: categories,
+      })
+        .unwrap()
+        .then(() => {
+          toast.success("Cập nhật danh mục thành công");
+          refetch(); // Cập nhật lại danh sách ngay sau khi thành công
+        })
+        .catch((err) => {
+          toast.error(err?.data?.message || "Có lỗi xảy ra");
+        });
+    }
   };
 
   return (
@@ -103,51 +92,57 @@ const EditCategories = (props: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="mt-[120px] text-center">
-          <h1 className={`${style.title}`}>Tất cả danh mục</h1>
-          {categories.map((item) => (
-            <div className="p-3" key={item._id}>
-              <div className="flex items-center w-full justify-center">
-                <input
-                  className={`${style.input} !w-[unset] !border-none !text-[20px]`}
-                  value={item.title}
-                  onChange={(e) =>
-                    handleCategoriesAdd(item._id, e.target.value)
-                  }
-                  placeholder="Hãy nhập tên danh mục..."
-                />
-                <AiOutlineDelete
-                  className="dark:text-white text-black text-[18px] cursor-pointer"
-                  onClick={() => handleCategoryDelete(item._id)} // Xử lý xóa danh mục
-                />
+        <div className="w-full max-w-4xl mx-auto mt-12 ml-[600px] p-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">
+            Chỉnh Sửa Danh Mục
+          </h2>
+          <div className="space-y-4">
+            {categories.map((category) => (
+              <div
+                key={category._id}
+                className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 transition-all duration-300 hover:shadow-sm"
+              >
+                <div className="flex items-center space-x-3">
+                  <label className="font-semibold text-gray-700 dark:text-gray-300 min-w-[80px]">
+                    <span className="text-[#b064c9] font-semibold">Danh mục:</span>
+                  </label>
+                  <input
+                    className={`flex-grow ${style.input} border-none bg-transparent text-lg mb-3`}
+                    value={category.title}
+                    onChange={(e: any) =>
+                      handleCategoryChange(category._id, e.target.value)
+                    }
+                    placeholder="Nhập tên danh mục"
+                  />
+                  <button
+                    onClick={() => handleCategoryDelete(category._id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <AiOutlineDelete className="h-6 w-6" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-          <br />
-          <br />
-          <div className="w-full flex justify-center">
-            <IoMdAddCircleOutline
-              className="dark:text-white text-black text-[25px] cursor-pointer"
-              onClick={newCategoriesHandler} // Thêm danh mục mới
-            />
+            ))}
           </div>
-          <div
-            className={`${
-              style.button
-            } !w-[100px] !min-h-[40px] dark:text-white text-black bg-[#cccccc34] ${
-              areCategoriesUnchanged(data.layout.categories, categories) ||
-              isAnyCategoryTitleEmpty(categories)
-                ? "!cursor-not-allowed"
-                : "!cursor-pointer !bg-[#42d383]"
-            } !rounded absolute bottom-12 right-12`}
-            onClick={
-              areCategoriesUnchanged(data.layout.categories, categories) ||
-              isAnyCategoryTitleEmpty(categories)
-                ? () => null
-                : EditCategoriesHandler
-            } // Lưu các thay đổi
-          >
-            Lưu
+
+          <div className="flex justify-between items-center mt-6">
+            <IoAddCircleOutline
+              className="dark:text-white text-black text-[25px] cursor-pointer hover:text-green-500"
+              onClick={newCategoriesHandler}
+            />
+
+            <div
+              className={`${style.button
+                } !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black 
+                ${areCategoriesUnchanged(data?.layout?.categories, categories) || isAnyCategoryTitleEmpty(categories)
+                  ? "!cursor-not-allowed bg-gray-300"
+                  : "!cursor-pointer !bg-green-500 hover:bg-green-600"
+                }
+                !rounded transition-all duration-300`}
+              onClick={handleEdit}
+            >
+              Lưu
+            </div>
           </div>
         </div>
       )}
