@@ -3,6 +3,9 @@ import UserAnalytics from '../Analytics/UserAnalytics';
 import { BiBorderLeft } from 'react-icons/bi';
 import { Box, CircularProgress } from '@mui/material';
 import { PiUsersFourLight } from 'react-icons/pi';
+import OrdersAnalytics from '../Analytics/OrdersAnalytics';
+import AllOrders from '../Order/AllOrders';
+import CourseAnalytics from '../Analytics/CourseAnalytics';
 
 type Props = {
   open?: boolean;
@@ -38,13 +41,14 @@ const CircularProgressWithLabel: FC<Props> = ({ open, value }) => {
 
 const DashboardWidgets: FC<Props> = ({ open, value }) => {
   return (
-    <div className="mt-[30px] min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-8 bg-[#f8f8f8] dark:bg-[#1C1C1C] rounded-lg shadow-md">
+    <div className="mt-[60px] min-h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pl-32">
+        <div className="w-[800px] h-auto bg-[#f8f8f8] dark:bg-[#1C1C1C] rounded-lg shadow-md">
           <UserAnalytics isDashboard={true} />
         </div>
+
         <div className="pt-[40px] pr-8 space-y-6">
-          <div className="w-full bg-[#111C43] rounded-lg shadow-md p-5">
+          <div className="w-[70%] mx-auto bg-[#111C43] rounded-lg shadow-md p-5">
             <div className="flex items-center">
               <BiBorderLeft className="text-[#45CBA0] dark:text-[#45CBA0] text-[30px]" />
               <div className="ml-4">
@@ -59,7 +63,8 @@ const DashboardWidgets: FC<Props> = ({ open, value }) => {
               <h5 className="text-center pt-4 text-white">+120%</h5>
             </div>
           </div>
-          <div className="w-full bg-[#111C43] rounded-lg shadow-md p-5">
+
+          <div className="w-[70%] mx-auto bg-[#111C43] rounded-lg shadow-md p-5">
             <div className="flex items-center">
               <PiUsersFourLight className="text-[#45CBA0] dark:text-[#45CBA0] text-[30px]" />
               <div className="ml-4">
@@ -75,10 +80,19 @@ const DashboardWidgets: FC<Props> = ({ open, value }) => {
             </div>
           </div>
         </div>
+
+        <div className='p-5'>
+          <h5 className='dark:text-white text-black text-[20px] font-[400] font-Roboto pb-3'>
+            Các hóa đơn gần đây
+          </h5>
+          <AllOrders isDashboard={true} />
+        </div>
+        <div className='pb-6 pr-16'>
+          <CourseAnalytics isDashboard={true} />
+        </div>
       </div>
     </div>
   );
 };
 
 export default DashboardWidgets;
-

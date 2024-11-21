@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import Loader from "../../Loader/Loader";
-import { format, register } from "timeago.js";
+import { register } from "timeago.js";
 import { useGetAllOrdersQuery } from "@/redux/features/order/orderAPI";
 import { useGetAllCoursesQuery } from "@/redux/features/course/courseAPI";
 import { AiOutlineMail } from "react-icons/ai";
-import { Box } from "@mui/material"; // Thay thế
+import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { CSVLink } from "react-csv";
+import { FaFileCsv } from "react-icons/fa";
 
 type Props = {
     isDashboard?: boolean;
@@ -21,21 +23,41 @@ const AllOrders = ({ isDashboard }: Props) => {
 
     const [orderData, setOrderData] = useState<any[]>([]);
 
+    // custom date format function
+    const formatDate = (date: Date) => {
+        return date.toLocaleDateString('vi-VN', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    };
+
+    //custom price
+    const formatVND = (price: number) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(price);
+    };
+
     useEffect(() => {
         if (data) {
             const users = usersData?.users || [];
             const courses = coursesData?.courses || [];
+            const orders = data.orders || [];
             const temp = data.orders.map((item: any) => {
                 const user = users.find((user: any) => user._id === item.userId);
                 const course = courses.find((course: any) => course._id === item.courseId);
-                console.log("check coursesData.courses: ", coursesData.courses)
-                console.log("check courses: ", courses)
+                // console.log("check coursesData.courses: ", coursesData.courses)
+                // console.log("check courses: ", courses)
+                // console.log("check date: ", data)
                 return {
                     ...item,
                     userName: user?.name || "Không rõ tên",
                     userEmail: user?.email || "Không rõ email",
                     title: course?.name || "Không rõ tên khóa học",
-                    price: course?.price ? `${course.price}đ` : "Không rõ giá",
+                    price: course?.price || "Không rõ giá",
+                    created_at: orders?.createdAt || "Không rõ ngày mua"
                 };
             });
             setOrderData(temp);
@@ -44,12 +66,12 @@ const AllOrders = ({ isDashboard }: Props) => {
 
     const columns: any = [
         { field: "id", headerName: "ID", flex: 0.3 },
-        { field: "userName", headerName: "Họ và tên", flex: 0.5 },
+        { field: "userName", headerName: "Họ và tên", flex: 0.3 },
         ...(isDashboard
             ? []
             : [
-                { field: "userEmail", headerName: "Email", flex: 1 },
-                { field: "title", headerName: "Tên khóa học", flex: 1 },
+                { field: "userEmail", headerName: "Email", flex: 0.6 },
+                { field: "title", headerName: "Tên khóa học", flex: .5 },
             ]),
         { field: "price", headerName: "Giá tiền", flex: 0.5 },
         ...(isDashboard
@@ -57,13 +79,14 @@ const AllOrders = ({ isDashboard }: Props) => {
                 { field: "created_at", headerName: "Ngày mua", flex: 0.5 },
             ]
             : [
+                { field: "created_at", headerName: "Ngày mua", flex: 0.5 },
                 {
                     field: "emailAction",
                     headerName: "Email",
                     flex: 0.2,
                     renderCell: (params: any) => (
-                        <a href={`mailto:${params.row.userEmail}`}>
-                            <AiOutlineMail className="text-black dark:text-white" size={20} />
+                        <a href={`mailto:${params.row.userEmail}`} className="flex justify-center items-center mt-3">
+                            <AiOutlineMail className="text-black dark:text-white" size={25} />
                         </a>
                     ),
                 },
@@ -75,8 +98,8 @@ const AllOrders = ({ isDashboard }: Props) => {
         userName: item.userName,
         userEmail: item.userEmail,
         title: item.title,
-        price: item.price,
-        created_at: format(item.createdAt, "vi-VI"),
+        price: formatVND(item.price),
+        created_at: formatDate(new Date(item.createdAt)),
     }));
 
     const localeText = {
@@ -110,34 +133,76 @@ const AllOrders = ({ isDashboard }: Props) => {
         return timeString[index];
     });
 
+    // export CSV
+    const csvData = orderData.map((item) => ({
+        ID: item._id,
+        "Họ và tên": item.userName,
+        Email: item.userEmail,
+        "Tên khóa học": item.title,
+        "Giá tiền": formatVND(item.price),
+        "Ngày mua": formatDate(new Date(item.createdAt)),
+    }));
+    const headers = [
+        { label: "ID", key: "ID" },
+        { label: "Họ và tên", key: "Họ và tên" },
+        { label: "Email", key: "Email" },
+        { label: "Tên khóa học", key: "Tên khóa học" },
+        { label: "Giá tiền", key: "Giá tiền" },
+        { label: "Ngày mua", key: "Ngày mua" },
+    ];
+
     return (
-        <div className={!isDashboard ? "mt-[120px]" : "mt-[0px]"}>
+        <div className={!isDashboard ? "mt-[20px] w-[85%] ml-[150px]" : "mt-[0px]"}>
             {isLoading ? (
                 <Loader />
             ) : (
-                <Box m={isDashboard ? 0 : "40px"}>
-                    <Box
-                        m={isDashboard ? 0 : "40px 0 0 0"}
-                        height={isDashboard ? "35vh" : "90vh"}
-                        sx={{
-                            "& .MuiDataGrid-root": { border: "none" },
-                            "& .MuiDataGrid-columnHeaders": {
-                                backgroundColor: theme === "dark" ? "#ccc" : "#A4A9FC",
-                            },
-                            "& .MuiDataGrid-footerContainer": {
-                                backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
-                            },
-                        }}
-                    >
-                        <DataGrid
-                            checkboxSelection={!isDashboard}
-                            rows={rows}
-                            columns={columns}
-                            localeText={localeText}
-                            components={!isDashboard ? { Toolbar: GridToolbar } : undefined}
-                        />
+                <>
+                    {!isDashboard && (
+                        <div className="flex items-center">
+                            <CSVLink
+                                data={csvData}
+                                headers={headers}
+                                filename="codeguru_orders.csv"
+                                target="_blank"
+                                className="ml-11 mt-4 flex items-center space-x-2 bg-[#4bb8eb] text-[18px] py-2 px-6 rounded-sm text-[#fff]"
+                            >
+                                <FaFileCsv />
+                                <span>In ra file</span>
+                            </CSVLink>
+                        </div>
+                    )}
+
+                    <Box m={isDashboard ? 0 : "40px"}>
+                        <Box
+                            m={isDashboard ? 0 : "40px 0 0 0"}
+                            height={isDashboard ? "35vh" : "90vh"}
+                            sx={{
+                                "& .MuiDataGrid-root": { border: "none" },
+                                "& .MuiDataGrid-columnHeaders": {
+                                    backgroundColor: theme === "dark" ? "#d9d7d7" : "#A4A9FC",
+                                },
+                                "& .MuiDataGrid-footerContainer": {
+                                    backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
+                                },
+                                "& .MuiDataGrid-row ": {
+                                    color: theme === "dark" ? "#d9d7d7" : "#000", //text
+                                    borderBottom:
+                                        theme === "dark"
+                                            ? "1px solid #ffffff30!important"
+                                            : "1px solid #245bc9!important",
+                                },
+                            }}
+                        >
+                            <DataGrid
+                                checkboxSelection={!isDashboard}
+                                rows={rows}
+                                columns={columns}
+                                localeText={localeText}
+                                components={!isDashboard ? { Toolbar: GridToolbar } : undefined}
+                            />
+                        </Box>
                     </Box>
-                </Box>
+                </>
             )}
         </div>
     );

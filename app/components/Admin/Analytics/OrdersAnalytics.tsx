@@ -12,30 +12,41 @@ const OrdersAnalytics = ({ isDashboard }: Props) => {
   const { data, isLoading } = useGetOrdersAnalyticsQuery({});
   const analyticsData: any[] = [];
 
-  // Kiểm tra và xử lý dữ liệu
+  const monthsInVietnamese = [
+    'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+    'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
+  ];
+
+  const formatToVietnameseDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString); // Chuyển chuỗi ngày thành đối tượng Date
+      const month = date.getMonth(); // Lấy chỉ số tháng (0 - 11)
+      const year = date.getFullYear(); // Lấy năm
+      return `${monthsInVietnamese[month]}, ${year}`; // Định dạng theo tiếng Việt
+    } catch {
+      return dateString; // Nếu có lỗi, trả lại chuỗi gốc
+    }
+  };
+
   if (data?.order?.last12Months) {
     data.order.last12Months.forEach((item: any) => {
-      analyticsData.push({ name: item.month, count: item.count });
+      analyticsData.push({
+        name: formatToVietnameseDate(item.month),
+        count: item.count,
+      });
     });
   }
-
- 
 
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
-        <div className={`w-full ${!isDashboard ? 'mt-[50px]' : 'mt-[50px] bg-gradient-to-r from-cyan-400 to-teal-400 dark:bg-[#111C43] shadow-lg rounded-lg p-5'}`}>
+        <div className={`w-full ${!isDashboard ? 'mt-[10px] pl-20' : 'mt-[50px] bg-[#9e99c9] dark:bg-[#111C43] shadow-lg rounded-lg p-5'}`}>
           <div className={`mb-4 ${isDashboard ? '!ml-8 mb-5' : ''}`}>
-            <h1 className={`${style.title} ${isDashboard && '!text-[20px]'} text-2xl text-gray-800 dark:text-white px-5 !text-start`}>
-              Biểu đồ lượt mua
+            <h1 className={`${style.title} ${isDashboard && '!text-[20px]'} text-2xl text-gray-800 dark:text-white px-5 !text-center`}>
+              Biểu đồ lượt mua khóa học
             </h1>
-            {!isDashboard && (
-              <p className={`${style.label} text-gray-600 dark:text-gray-300 px-5`}>
-                Dữ liệu của 12 tháng gần nhất
-              </p>
-            )}
           </div>
 
           <div className={`w-full ${isDashboard ? 'h-[300px]' : 'h-[400px]'} flex items-center justify-center`}>
@@ -56,9 +67,13 @@ const OrdersAnalytics = ({ isDashboard }: Props) => {
                   </linearGradient>
                 </defs>
 
-                <XAxis dataKey="name" stroke="#4facfe" />
-                <YAxis stroke="#4facfe" />
-                <Tooltip contentStyle={{ backgroundColor: '#333', color: '#fff' }} />
+                <XAxis dataKey="name" stroke="#4facfe" label={{ value: 'Ngày', position: 'insideBottomRight', offset: -10 }} />
+                <YAxis stroke="#4facfe" label={{ value: 'Số lượt mua', angle: -90, position: 'insideLeft', offset: -10 }} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#333', color: '#fff' }}
+                  formatter={(value: number) => [`${value}`, 'Lượt mua']}
+                  labelFormatter={(label: string) => `${label}`}
+                />
                 <Line
                   type="monotone"
                   dataKey="count"
@@ -77,4 +92,3 @@ const OrdersAnalytics = ({ isDashboard }: Props) => {
 };
 
 export default OrdersAnalytics;
-
