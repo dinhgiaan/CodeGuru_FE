@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import { style } from "../styles/style";
 import CourseCard from "../components/Course/CourseCard";
 import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
+import Footer from "../components/Footer";
 
 type Props = {};
 
@@ -66,7 +67,7 @@ const Page = (props: Props) => {
           />
           <div className="w-[95%] 800px:w-[85%] m-auto min-h-[70vh]">
             <Heading
-              title={"Tất cả khóa học - CodeGuru"}
+              title={"Các khóa học của CodeGuru"}
               description={
                 "Code Guru là một chương trình dành cho cộng đồng công nghệ thông tin"
               }
@@ -78,9 +79,8 @@ const Page = (props: Props) => {
             {/* Hiển thị danh mục */}
             <div className="w-full flex items-center flex-wrap">
               <div
-                className={`h-[35px] ${
-                  category === "All" ? "bg-[crimson]" : "bg-[#5050cb]"
-                } m-3 px-3 rounded-[30px] flex items-center justify-center cursor-pointer`}
+                className={`h-[35px] ${category === "All" ? "bg-[crimson]" : "bg-[#5050cb]"
+                  } m-3 px-3 rounded-[30px] flex items-center justify-center cursor-pointer`}
                 onClick={() => setCategory("All")}
               >
                 Tất cả
@@ -89,11 +89,10 @@ const Page = (props: Props) => {
                 categories.map((item: any, index: number) => (
                   <div key={index}>
                     <div
-                      className={`h-[35px] ${
-                        category === item.title
-                          ? "bg-[crimson]"
-                          : "bg-[#5050cb]"
-                      } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
+                      className={`h-[35px] ${category === item.title
+                        ? "bg-[crimson]"
+                        : "bg-[#5050cb]"
+                        } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
                       onClick={() => setCategory(item.title)} // Lựa chọn danh mục
                     >
                       {item.title}
@@ -124,6 +123,7 @@ const Page = (props: Props) => {
               ))}
             </div>
           </div>
+          <Footer />
         </>
       )}
     </div>
