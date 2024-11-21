@@ -5,7 +5,10 @@ import Heading from "@/app/utils/Heading";
 import Header from "../Header";
 import CourseDetails from "./CourseDetails";
 import Footer from "../Footer";
-import { useCreatePaymentIntentMutation, useGetStripePublishableKeyQuery } from "@/redux/features/order/orderAPI";
+import {
+  useCreatePaymentIntentMutation,
+  useGetStripePublishableKeyQuery,
+} from "@/redux/features/order/orderAPI";
 import { loadStripe } from "@stripe/stripe-js";
 
 type Props = {
@@ -18,9 +21,10 @@ const CourseDetailsPage = ({ id }: Props) => {
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetCoursesDetailsQuery(id);
   const { data: config } = useGetStripePublishableKeyQuery({});
-  const [createPaymentIntent, { data: paymentIntentData }] = useCreatePaymentIntentMutation();
+  const [createPaymentIntent, { data: paymentIntentData }] =
+    useCreatePaymentIntentMutation();
   const [stripePromise, setStripePromise] = useState<any>(null);
-  const [clientSecret, setClientSecret] = useState('');
+  const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     if (config) {
@@ -62,7 +66,13 @@ const CourseDetailsPage = ({ id }: Props) => {
             setOpen={setOpen}
             activeItem={1}
           />
-          {data && data.course && <CourseDetails data={data.course} stripePromise={stripePromise} clientSecret={clientSecret} />}
+          {data && data.course && (
+            <CourseDetails
+              data={data.course}
+              stripePromise={stripePromise}
+              clientSecret={clientSecret}
+            />
+          )}
           <Footer />
         </div>
       )}

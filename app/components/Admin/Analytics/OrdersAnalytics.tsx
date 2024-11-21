@@ -1,8 +1,15 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { useGetOrdersAnalyticsQuery } from '@/redux/features/analytics/analyticsApi';
-import { style } from '@/app/styles/style';
-import Loader from '../../Loader/Loader';
+import React from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { useGetOrdersAnalyticsQuery } from "@/redux/features/analytics/analyticsApi";
+import { style } from "@/app/styles/style";
+import Loader from "../../Loader/Loader";
 
 type Props = {
   isDashboard?: boolean;
@@ -49,8 +56,14 @@ const OrdersAnalytics = ({ isDashboard }: Props) => {
             </h1>
           </div>
 
-          <div className={`w-full ${isDashboard ? 'h-[300px]' : 'h-[400px]'} flex items-center justify-center`}>
-            <ResponsiveContainer width={isDashboard ? '100%' : '90%'} height="100%">
+          <div
+            className={`w-full ${isDashboard ? "h-[300px]" : "h-[400px]"
+              } flex items-center justify-center`}
+          >
+            <ResponsiveContainer
+              width={isDashboard ? "100%" : "90%"}
+              height="100%"
+            >
               <LineChart
                 data={analyticsData}
                 margin={{
@@ -61,12 +74,17 @@ const OrdersAnalytics = ({ isDashboard }: Props) => {
                 }}
               >
                 <defs>
-                  <linearGradient id="gradientColor" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient
+                    id="gradientColor"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#4facfe" stopOpacity={1} />
                     <stop offset="100%" stopColor="#00f2ea" stopOpacity={1} />
                   </linearGradient>
                 </defs>
-
                 <XAxis dataKey="name" stroke="#4facfe" label={{ value: 'Ngày', position: 'insideBottomRight', offset: -10 }} />
                 <YAxis stroke="#4facfe" label={{ value: 'Số lượt mua', angle: -90, position: 'insideLeft', offset: -10 }} />
                 <Tooltip

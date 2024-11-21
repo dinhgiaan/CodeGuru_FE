@@ -9,7 +9,7 @@ import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../Payment/CheckoutForm";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
-import Image from 'next/image';
+import Image from "next/image";
 import { VscVerifiedFilled } from "react-icons/vsc";
 
 type Props = {
@@ -20,15 +20,16 @@ type Props = {
 
 const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
   const formatVNDPrice = (price: number) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
     }).format(price);
   };
   const { data: userData } = useLoadUserQuery(undefined, {});
-  const user = userData?.user;
+  const [user, setUser] = useState<any>();
   const [open, setOpen] = useState(false);
-  const discountPercentage = ((data?.suggestedPrice - data.price) / data.suggestedPrice) * 100;
+  const discountPercentage =
+    ((data?.suggestedPrice - data.price) / data.suggestedPrice) * 100;
 
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
@@ -138,13 +139,16 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                     <div className="flex">
                       <div className="w-12 h-12">
                         <Image
-                          src={item.user.avatar ? item.user.avatar.url : "https://res.cloudinary.com/duw4cwp7d/image/upload/v1731131446/avatars/v7mr3zt3yoj0n0f9bobj.png"}
+                          src={
+                            item.user.avatar
+                              ? item.user.avatar.url
+                              : "https://res.cloudinary.com/duw4cwp7d/image/upload/v1731131446/avatars/v7mr3zt3yoj0n0f9bobj.png"
+                          }
                           width={50}
                           height={50}
                           alt=""
                           className="w-[50px] h-[50px] rounded-full object-cover"
                         />
-
                       </div>
                       <div className="hidden lg:block pl-2">
                         <div className="flex items-center">
@@ -171,37 +175,36 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
                         <Rating rating={item.rating} />
                       </div>
                     </div>
-                    {
-                      item.commentReplies.map((i: any, index: number) => (
-                        <div key={index} className="w-full flex 800px:ml-16 my-5 dark:text-white text-black">
-                          <div className="w-[50px] h-[50px] ">
-                            <Image
-                              src={i.user.avatar ? i.user.avatar.url : "https://res.cloudinary.com/duw4cwp7d/image/upload/v1731131446/avatars/v7mr3zt3yoj0n0f9bobj.png"}
-                              width={50}
-                              height={50}
-                              alt=""
-                              className="w-[50px] h-[50px] rounded-full object-cover"
-                            />
-                          </div>
-                          <div className="pl-2">
-                            <div className="flex items-center">
-                              <h5 className="text-[20px]">{i.user.name}</h5>{" "}
-                              <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
-                            </div>
-                            <p>{i.comment}</p>
-                            <small className="text-[#ffffff83]">
-                              {format(i.createdAt)}
-                            </small>
-                          </div>
+                    {item.commentReplies.map((i: any, index: number) => (
+                      <div
+                        key={index}
+                        className="w-full flex 800px:ml-16 my-5 dark:text-white text-black"
+                      >
+                        <div className="w-[50px] h-[50px] ">
+                          <Image
+                            src={
+                              i.user.avatar
+                                ? i.user.avatar.url
+                                : "https://res.cloudinary.com/duw4cwp7d/image/upload/v1731131446/avatars/v7mr3zt3yoj0n0f9bobj.png"
+                            }
+                            width={50}
+                            height={50}
+                            alt=""
+                            className="w-[50px] h-[50px] rounded-full object-cover"
+                          />
                         </div>
-                      ))
-                    }
-
-
-
-
-
-
+                        <div className="pl-2">
+                          <div className="flex items-center">
+                            <h5 className="text-[20px]">{i.user.name}</h5>{" "}
+                            <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
+                          </div>
+                          <p>{i.comment}</p>
+                          <small className="text-[#ffffff83]">
+                            {format(i.createdAt)}
+                          </small>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )
               )}
@@ -267,14 +270,16 @@ const CourseDetails = ({ data, stripePromise, clientSecret }: Props) => {
               </div>
               <div className="w-96 pb-8">
                 {stripePromise && clientSecret && (
-                  <Elements stripe={stripePromise} options={{ clientSecret, locale: 'vi' }}>
-                    <CheckoutForm setOpen={setOpen} data={data} />
+                  <Elements
+                    stripe={stripePromise}
+                    options={{ clientSecret, locale: "vi" }}
+                  >
+                    <CheckoutForm setOpen={setOpen} data={data} user={user} />
                   </Elements>
                 )}
               </div>
             </div>
           </div>
-
         )}
       </>
     </div>

@@ -1,7 +1,8 @@
-import React, { useState, FC } from "react";
-import { style } from '@/app/styles/style';
+import React, { useState, FC, useEffect } from "react";
+import { style } from "@/app/styles/style";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
 
 type Props = {
   courseInfo: any;
@@ -17,6 +18,14 @@ const CourseInformation: FC<Props> = ({
   setActive,
 }) => {
   const [dragging, setDragging] = useState(false);
+  const { data } = useGetHeroDataQuery("Categories", {}); // Lấy dữ liệu categories
+  const [categories, setCategories] = useState<any[]>([]); // Lưu danh sách categories
+
+  useEffect(() => {
+    if (data) {
+      setCategories(data.layout.categories); // Cập nhật categories từ dữ liệu API
+    }
+  }, [data]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +35,7 @@ const CourseInformation: FC<Props> = ({
       return;
     }
 
-    setActive(active + 1);
+    setActive(active + 1); // Chuyển sang bước tiếp theo
   };
 
   const handleFileChange = (e: any) => {
@@ -40,17 +49,17 @@ const CourseInformation: FC<Props> = ({
       };
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   const handleDragOver = (e: any) => {
     e.preventdefault();
     setDragging(true);
-  }
+  };
 
   const handleDragLeave = (e: any) => {
     e.preventdefault();
     setDragging(false);
-  }
+  };
 
   const handleDrop = (e: any) => {
     e.preventdefault();
@@ -64,7 +73,7 @@ const CourseInformation: FC<Props> = ({
       };
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   return (
     <div className="w-[80%] m-auto mt-24 mb-10">
@@ -106,9 +115,7 @@ const CourseInformation: FC<Props> = ({
 
         <div className="flex justify-between">
           <div className="w-[48%]">
-            <label className={style.label}>
-              Giá khóa học
-            </label>
+            <label className={style.label}>Giá khóa học</label>
             <input
               type="number"
               required
@@ -123,9 +130,7 @@ const CourseInformation: FC<Props> = ({
           </div>
 
           <div className="w-[48%]">
-            <label className={style.label}>
-              Giá gốc khóa học
-            </label>
+            <label className={style.label}>Giá gốc khóa học</label>
             <input
               type="number"
               value={courseInfo.suggestedPrice}
@@ -137,6 +142,31 @@ const CourseInformation: FC<Props> = ({
               className={style.input}
             />
           </div>
+        </div>
+        <br />
+        <div className="w-[50%]">
+          <label
+            className={`${style.label} w-[50%] dark:text-white text-black`}
+          >
+            Course Categories
+          </label>
+          <select
+            name="categories"
+            id="categories"
+            className={`${style.input}`}
+            value={courseInfo.categories || ""}
+            onChange={
+              (e: any) =>
+                setCourseInfo({ ...courseInfo, categories: e.target.value }) // Cập nhật categories
+            }
+          >
+            <option value=""> Lựa chọn danh mục</option>
+            {categories.map((item) => (
+              <option value={item._id} key={item._id}>
+                {item.title}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -164,7 +194,7 @@ const CourseInformation: FC<Props> = ({
               value={courseInfo.level}
               required
               onChange={(e: any) => {
-                setCourseInfo({ ...courseInfo, level: e.target.value })
+                setCourseInfo({ ...courseInfo, level: e.target.value });
               }}
               id="level"
               placeholder="Fresher/ Junior/ Middle/ Senior"

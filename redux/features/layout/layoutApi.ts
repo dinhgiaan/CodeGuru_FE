@@ -1,5 +1,7 @@
 
+import { Subtitles } from "lucide-react";
 import { apiSlice } from "../api/apiSlice";
+import EditCategories from "@/app/components/Admin/Customization/EditCategories";
 
 export const layoutApi = apiSlice.injectEndpoints({
     endpoints:(builder) => ({
@@ -11,15 +13,20 @@ export const layoutApi = apiSlice.injectEndpoints({
             })
         }),
         editLayout: builder.mutation({
-            query: ({ type,image,title,subTitle,faq,categories})=>({
-                url:`edit-layout`,
+            query: ({type,image,title,SubTitle,faq,categories}) => ({
+                url: `edit-layout`,
                 body:{
-                    type,image,title,subTitle,faq,categories
+                    type,
+                    image,
+                    title,
+                    SubTitle,
+                    faq,
+                    categories
                 },
                 method:"PUT",
-                credentials: "include" as const
+                credentials:"include" as const,
             })
         })
     })
 })
-export const {useGetHeroDataQuery,useEditLayoutMutation} = layoutApi;
+export const {useGetHeroDataQuery, useEditLayoutMutation} = layoutApi;

@@ -4,8 +4,8 @@ import { BiBorderLeft } from 'react-icons/bi';
 import { Box, CircularProgress } from '@mui/material';
 import { PiUsersFourLight } from 'react-icons/pi';
 import OrdersAnalytics from '../Analytics/OrdersAnalytics';
-import AllOrders from '../Order/AllOrders';
 import CourseAnalytics from '../Analytics/CourseAnalytics';
+
 
 type Props = {
   open?: boolean;
@@ -14,12 +14,12 @@ type Props = {
 
 const CircularProgressWithLabel: FC<Props> = ({ open, value }) => {
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
       <CircularProgress
         variant="determinate"
         value={value}
         size={45}
-        color={value && value > 99 ? 'success' : 'warning'}
+        color={value && value > 99 ? "success" : "warning"}
         thickness={4}
         style={{ zIndex: open ? -1 : 1 }}
       />
@@ -29,10 +29,10 @@ const CircularProgressWithLabel: FC<Props> = ({ open, value }) => {
           left: 0,
           bottom: 0,
           right: 0,
-          position: 'absolute',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       />
     </Box>
@@ -85,7 +85,7 @@ const DashboardWidgets: FC<Props> = ({ open, value }) => {
           <h5 className='dark:text-white text-black text-[20px] font-[400] font-Roboto pb-3'>
             Các hóa đơn gần đây
           </h5>
-          <AllOrders isDashboard={true} />
+          <OrdersAnalytics isDashboard={true} />
         </div>
         <div className='pb-6 pr-16'>
           <CourseAnalytics isDashboard={true} />
