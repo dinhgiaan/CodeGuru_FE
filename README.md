@@ -1,5 +1,3 @@
-# CodeGuru
-
 <p align="center">
    <a href='#'> 
       <img src="https://res.cloudinary.com/duw4cwp7d/image/upload/v1728060682/logo-codeguru_mjy0p9.png" width="200px">
@@ -11,6 +9,12 @@
 ## Giới thiệu
 
 **CodeGuru** là một nền tảng cung cấp khóa học trực tuyến, được xây dựng bởi Nhóm 10. Mục tiêu của chúng tôi là mang đến môi trường học tập hiện đại, dễ tiếp cận và hiệu quả cho người học.
+
+---
+
+[Xem Video Demo tại đây](https://www.youtube.com/watch?v=F69pqAsAizY)
+
+[![Xem Video Demo](https://img.youtube.com/vi/F69pqAsAizY/0.jpg)](https://www.youtube.com/watch?v=F69pqAsAizY)
 
 ---
 
