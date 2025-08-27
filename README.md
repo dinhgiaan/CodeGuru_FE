@@ -33,7 +33,7 @@
 ### Trang chủ
 
 <p align="center">
-  <img src="images/home.png" alt="Trang chủ" width="800"/>
+  <img src="https://res.cloudinary.com/duw4cwp7d/image/upload/v1756314381/trang-chu_i1ulwl.png" alt="Trang chủ" width="800"/>
 </p>
 
 **Các thành phần chính:**
